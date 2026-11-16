@@ -14,5 +14,5 @@
 | 003 | Villager routines | Logic | Complete | N/A |
 | 004 | NPCs running around | Logic | Complete | N/A |
 | 005 | Small events and the log | Integration | Complete | N/A |
-| 006 | Day and night | Visual/Feel | Ready | N/A |
-| 007 | Idle controls and HUD | UI | Ready | N/A |
+| 006 | Day and night | Visual/Feel | In Progress | N/A |
+| 007 | Idle controls and HUD | UI | Complete | N/A |

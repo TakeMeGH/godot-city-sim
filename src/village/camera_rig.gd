@@ -59,6 +59,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _process(delta: float) -> void:
+	# Camera motion is the player's, not the simulation's: undo the speed multiplier
+	# (Engine.time_scale, story 007) so panning and drift keep their real-time pace.
+	if Engine.time_scale > 0.0:
+		delta /= Engine.time_scale
 	if _frozen:
 		_drag_delta = Vector2.ZERO
 		return

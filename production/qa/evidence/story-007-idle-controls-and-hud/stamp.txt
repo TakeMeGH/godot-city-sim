@@ -1,0 +1,12 @@
+Reviewed-Content-Hash: src/village/simulation_speed.gd f32620ec0a1f052c280d07f0814103e96184a0d3
+Reviewed-Content-Hash: src/ui/hud.gd 57a7d534ba08a8819411dc7b222077671f81aaf0
+Reviewed-Content-Hash: src/ui/title_screen.gd 00d097acb48554dd8b9c907c16933f9eb2887118
+Reviewed-Content-Hash: src/ui/villager_label.gd 2a8e1d28cbea4437b431f8b31d9296874abc0b02
+Reviewed-Content-Hash: src/ui/hud.tscn 98e581eeeec6876b4aad1a799ab74fc10d7dbe57
+Reviewed-Content-Hash: src/ui/title_screen.tscn 02479269664536273e88f9fa059941e704472e0e
+Reviewed-Content-Hash: src/ui/hud_theme.tres 4fb24ec117fc5381deb84364cfccbe5869d6ae82
+Reviewed-Content-Hash: src/train/train.gd dddaa1aef36236bbca58b07576c6103f8f68a1d8
+Reviewed-Content-Hash: src/villagers/villager.gd c10a74adb7ca76ab2340fe340e4170c0a413b9cb
+Reviewed-Content-Hash: src/village/camera_rig.gd 71fb45aa62289310e4a38656f4e61299cc9a661b
+Reviewed-Content-Hash: src/village/village_scene.tscn 90adb3e4723735b74f7992a9d0c636414ad8d1ea
+Reviewed-Content-Hash: assets/data/village_tuning.json 164aab3fdbe815e92743e20579f6cc7e26bd8ca0

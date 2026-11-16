@@ -50,7 +50,7 @@ None, by design *(you said)*. What builds over time is the day: morning commute,
 - [x] NPCs running around: kids playing tag, ninjas sprinting on errands and dashing across the rooftops
 - [x] Small events, each with a one-line log: sparring match with a crowd, messenger hawk, cat chasing a sparrow, the evening lantern round
 - [ ] Day and night cycle: lit windows and lantern glow at night, villagers go home *(guessed)*
-- [ ] Idle controls: pause, speed, click a villager for name and task *(guessed)*
+- [x] Idle controls: pause, speed, click a villager for name and task *(guessed)*
 
 ## Your systems
 - train in the village · in the slice

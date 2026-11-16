@@ -1,0 +1,150 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/ui/hud.gd" id="1_hud"]
+[ext_resource type="Theme" path="res://src/ui/hud_theme.tres" id="2_theme"]
+[ext_resource type="Script" path="res://src/ui/villager_label.gd" id="3_label"]
+
+[node name="Hud" type="CanvasLayer"]
+process_mode = 3
+layer = 10
+script = ExtResource("1_hud")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_theme")
+
+[node name="Top" type="VBoxContainer" parent="Root"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="StatusPanel" type="PanelContainer" parent="Root/Top"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Row" type="HBoxContainer" parent="Root/Top/StatusPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="Clock" type="Label" parent="Root/Top/StatusPanel/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Day 1  06:28  Dawn"
+
+[node name="Speed" type="Label" parent="Root/Top/StatusPanel/Row"]
+layout_mode = 2
+theme_type_variation = &"HudDim"
+text = "x1"
+horizontal_alignment = 2
+
+[node name="TrainPanel" type="PanelContainer" parent="Root/Top"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Train" type="Label" parent="Root/Top/TrainPanel"]
+layout_mode = 2
+theme_type_variation = &"HudSoft"
+text = "Next train in 6s"
+
+[node name="Bottom" type="HBoxContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="Log" type="VBoxContainer" parent="Root/Bottom"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/separation = 1
+alignment = 2
+
+[node name="Controls" type="PanelContainer" parent="Root/Bottom"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="Lines" type="VBoxContainer" parent="Root/Bottom/Controls"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Line1" type="Label" parent="Root/Bottom/Controls/Lines"]
+layout_mode = 2
+theme_type_variation = &"HudSoft"
+text = "Space pause · 1 2 3 speed · drag or arrows to look"
+horizontal_alignment = 1
+
+[node name="Line2" type="Label" parent="Root/Bottom/Controls/Lines"]
+layout_mode = 2
+theme_type_variation = &"HudSoft"
+text = "click a villager · H hide · M mute · R new day"
+horizontal_alignment = 1
+
+[node name="PausePanel" type="CenterContainer" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_theme")
+
+[node name="Panel" type="PanelContainer" parent="PausePanel"]
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"StrongPanel"
+
+[node name="Box" type="VBoxContainer" parent="PausePanel/Panel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Title" type="Label" parent="PausePanel/Panel/Box"]
+layout_mode = 2
+theme_type_variation = &"BoldLabel"
+theme_override_colors/font_color = Color(1, 0.89, 0.604, 1)
+theme_override_font_sizes/font_size = 12
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="Hint" type="Label" parent="PausePanel/Panel/Box"]
+layout_mode = 2
+theme_type_variation = &"HudSoft"
+text = "Space to carry on"
+horizontal_alignment = 1
+
+[node name="VillagerLabel" type="PanelContainer" parent="."]
+visible = false
+mouse_filter = 2
+theme = ExtResource("2_theme")
+theme_type_variation = &"StrongPanel"
+script = ExtResource("3_label")
+
+[node name="Text" type="Label" parent="VillagerLabel"]
+layout_mode = 2
+theme_type_variation = &"HudGold"

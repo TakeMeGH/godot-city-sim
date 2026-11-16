@@ -298,3 +298,26 @@ func _load_json(path: String, required_keys: Array[String]) -> Dictionary:
 			push_error("Train: %s has no '%s'" % [path, key])
 			return {}
 	return data
+
+
+## True while the train is on screen (arriving, stopped or leaving), for the night
+## headlamp glow (story 006).
+func is_running() -> bool:
+	return _state != State.WAITING
+
+
+## World position of the locomotive's front on the track: the headlamp glow anchor
+## (story 006). Valid after setup.
+func front_position() -> Vector2:
+	return village.tile_to_world(_front, _track_j)
+
+
+## The train's current state (WAITING, ARRIVING, STOPPED or LEAVING), for the HUD (story 007).
+func get_state() -> State:
+	return _state
+
+
+## Simulation seconds until the next train starts arriving; 0 while a train is running
+## (the HUD's next-train countdown, story 007).
+func seconds_to_next_train() -> float:
+	return maxf(0.0, _timer) if _state == State.WAITING else 0.0

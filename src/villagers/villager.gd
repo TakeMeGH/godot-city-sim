@@ -190,3 +190,9 @@ func _update_frame(delta: float) -> void:
 	# flip_h mirrors inside the sprite's rect, so move the offset to keep the anchor under the feet.
 	_sprite.flip_h = flipped
 	_sprite.offset.x = -(_width - _anchor_x) if flipped else -_anchor_x
+
+
+## Pixels from the ground anchor up to the top of the sprite, so a label can sit above the
+## head (story 007).
+func height_above_feet() -> float:
+	return -_sprite.get_rect().position.y if _sprite != null else 0.0

@@ -1,0 +1,5 @@
+Reviewed-Content-Hash: src/village/daylight.gd cd6e5983ea8aa99f56085291bd0642b5edf4c314
+Reviewed-Content-Hash: src/village/night_glow.gd e299414230e7e69a480402849aac37d9c49a3d05
+Reviewed-Content-Hash: src/train/train.gd f9c64ba328f35258cee247645a25c7da3a9f4f32
+Reviewed-Content-Hash: src/village/village_scene.tscn e217e0864b729223fc595d73f0ff47aa91130cbc
+Reviewed-Content-Hash: assets/data/village_tuning.json eb87b4cb26c88f3d92c657f04447d6a790fd00cf
