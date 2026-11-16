@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://src/villagers/villager_routines.gd" id="5_routines"]
 [ext_resource type="Script" path="res://src/villagers/kid_tag.gd" id="6_kids"]
 [ext_resource type="Script" path="res://src/villagers/rooftop_dash.gd" id="7_dash"]
+[ext_resource type="Script" path="res://src/village/village_log.gd" id="8_log"]
+[ext_resource type="Script" path="res://src/events/event_director.gd" id="9_events"]
 
 [node name="VillageScene" type="Node2D"]
 script = ExtResource("1_village")
@@ -41,3 +43,17 @@ routines = NodePath("../VillagerRoutines")
 script = ExtResource("7_dash")
 village = NodePath("..")
 routines = NodePath("../VillagerRoutines")
+
+[node name="VillageLog" type="Node" parent="." node_paths=PackedStringArray("clock", "routines", "kid_tag", "rooftop_dash")]
+script = ExtResource("8_log")
+clock = NodePath("../DayClock")
+routines = NodePath("../VillagerRoutines")
+kid_tag = NodePath("../KidTag")
+rooftop_dash = NodePath("../RooftopDash")
+
+[node name="EventDirector" type="Node" parent="." node_paths=PackedStringArray("village", "clock", "routines", "village_log")]
+script = ExtResource("9_events")
+village = NodePath("..")
+clock = NodePath("../DayClock")
+routines = NodePath("../VillagerRoutines")
+village_log = NodePath("../VillageLog")
