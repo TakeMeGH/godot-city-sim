@@ -32,7 +32,15 @@ window.CONFIG = {
   train_speed: { value: 4.5, min: 1, max: 10, step: 0.5 },      // tiles per second at full speed
   train_cars: { value: 2, min: 1, max: 4, step: 1 },            // carriages behind the locomotive
   train_first: { value: 6, min: 0, max: 60, step: 1 },          // seconds before the first train
-  stop_i: { value: 10.4, min: 6, max: 14, step: 0.1 },          // where the loco's front stops (tile i)
+  stop_i: { value: 9.4, min: 6, max: 14, step: 0.1 },           // where the loco's front stops (tile i)
+
+  // --- the camera ---
+  pan_speed: { value: 180, min: 40, max: 600, step: 10 },       // px per second with the arrow keys
+  drift_after: { value: 6, min: 1, max: 60, step: 1 },          // seconds without input before it drifts again
+  drift_x: { value: 150, min: 0, max: 300, step: 10 },          // how far the drift wanders left and right (px)
+  drift_y: { value: 70, min: 0, max: 200, step: 10 },           // how far the drift wanders up and down (px)
+  cam_range_x: { value: 190, min: 0, max: 400, step: 10 },      // how far the camera may pan from the centre (px)
+  cam_range_y: { value: 110, min: 0, max: 300, step: 10 },
 
   // --- events ---
   event_gap: { value: 28, min: 5, max: 120, step: 1 },          // seconds between small events (day)

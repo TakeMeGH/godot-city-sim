@@ -7,11 +7,14 @@ Change before build: i prefer this ninja style like naruto.. i really like konoh
 
 Change before build: i also want some npc running arround and maybe some small event to make it more life
 
+After play: i want to give feedback and maybe you need to something about it. the prototype pixel art very ugly. there is guide to create it also [the Aseprite MCP drawing guide: palette ramps first, layers, coarse to fine, view after every pass, shade with intent, animate with the cel tools]. also try check great pixel art like in moonlighter, chef rpg, etc
+After play: picked bigger, camera pans: 64x32 tiles, villagers about 32 px tall, a smaller village, a camera that drifts and pans
+
 **Pitch:** A hand-pixelled ninja village lives out its day on one screen while you watch: a little steam train pulls into the station, villagers walk their routines, a dojo spars, and lanterns light up at dusk.
 
 **Genre:** ambient village simulation (a living diorama you idle and watch)
 
-**Controls:** none needed. Optional: Space pauses, 1/2/3 sets speed, click a villager to see their name and what they're doing, H hides the HUD *(guessed)*
+**Controls:** none needed. Optional: Space pauses, 1/2/3 sets speed, drag or arrow keys look around, click a villager to see their name and what they're doing, H hides the HUD *(guessed)*
 
 **Question:** How far can Aseprite-MCP pixel art and an AI build take a ninja village you can sit and watch?
 
@@ -21,8 +24,8 @@ Change before build: i also want some npc running arround and maybe some small e
 
 ## Look and references
 - Look: isometric pixel art drawn in Aseprite *(you said)*. A hidden ninja village in a forest valley in the spirit of Konoha *(you said)*: packed round-walled towers and boxy blocks with warm terracotta and red-orange roofs, rooftop water tanks, washing lines and cloth banners, a tall plain cliff behind, giant broad-canopy trees around. Ninjas drawn anime-style: spiky or long hair, plain metal-plated headbands, sandals, kunai pouch, each villager type with its own silhouette. Warm afternoon sun, cool blue shadows, lit windows and lantern glow at night. Signature detail: rooftop water tanks and washing lines catching the light. 1 px dark outline, top-left light, no anti-aliasing. Every figure drawn, no emoji, no plain circles
-- References: Naruto's Konoha *(you said)*: the hidden-village-in-the-trees warmth, roof colours and shapes, anime ninja silhouettes
-- View: 2D isometric *(you said)* · Camera: a fixed 2:1 isometric view of the whole village on one screen, native 480×270 scaled up by whole numbers *(guessed)*
+- References: Naruto's Konoha *(you said)*: the hidden-village-in-the-trees warmth, roof colours and shapes, anime ninja silhouettes. Moonlighter and Chef RPG *(you said)*: the pixel-art craft, hue-shifted ramps, textured materials, coloured selective outlines, contact shadows, leaf-cluster trees and street clutter
+- View: 2D isometric *(you said)* · Camera: 64x32 tiles at native 480×270, scaled by whole numbers; it drifts slowly over the village and pans by drag or arrow keys *(you said: bigger, camera pans)*
 
 ## First minute
 It's early morning in the forest clearing. Villagers step out of their doors into the streets, kids start a game of tag in the square, and ninjas head for the training ground. The train whistles in from the left, slows, and stops at the station; passengers step off and others board. A ninja dashes across the rooftops, and a small event starts: a sparring match draws a crowd. Within the minute you've seen the whole loop of the village, and the train pulls out again.
@@ -62,7 +65,7 @@ None, by design *(you said)*. What builds over time is the day: morning commute,
 ## Avoid
 - any gameplay: no goals, money, building, losing or score *(you said: "we dont need any gameplay")*
 - art drawn in code instead of Aseprite (only the sky gradient and night tint are code)
-- Naruto's names, characters, the leaf symbol, the carved faces on the cliff, the village gate and its named buildings: the look guides the art, the series' designs stay its owner's
+- Naruto's names, characters, the leaf symbol, the carved faces on the cliff, the village gate and its named buildings; Moonlighter's and Chef RPG's own art, characters and UI: the look guides the art, the series' designs stay its owner's
 
 ## Out of scope
 - several districts and a region map: grow it

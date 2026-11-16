@@ -7,13 +7,18 @@ Change before build: i prefer this ninja style like naruto.. i really like konoh
 
 Change before build: i also want some npc running arround and maybe some small event to make it more life
 
-**Pitch:** A hand-pixelled ninja village lives out its day on one screen while you watch: a little steam train pulls into the station, villagers walk their routines, a dojo spars, and lanterns light up at dusk.
+After play: i want to give feedback and maybe you need to something about it. the prototype pixel art very ugly. there is guide to create it also [the Aseprite MCP drawing guide: palette ramps first, layers, coarse to fine, view after every pass, shade with intent, animate with the cel tools]. also try check great pixel art like in moonlighter, chef rpg, etc
+After play: picked bigger, camera pans: 64x32 tiles, villagers about 32 px tall, a smaller village, a camera that drifts and pans
+
+Brainstorm (Godot version): picked "as built": the browser prototype's village, rebuilt in Godot.
+
+**Pitch:** An isometric hidden ninja village lives out its day on one screen while you watch: a steam train pulls into the station, kids play tag, ninjas train and sprint over the rooftops, and lanterns light up at dusk.
 
 **Genre:** ambient village simulation (a living diorama you idle and watch)
 
-**Controls:** none needed. Optional: Space pauses, 1/2/3 sets speed, click a villager to see their name and what they're doing, H hides the HUD *(guessed)*
+**Controls:** none needed. Optional: Space pauses, 1/2/3 sets speed, drag or arrow keys look around, click a villager to see their name and what they're doing, H hides the HUD *(guessed)*
 
-**Question:** How far can Aseprite-MCP pixel art and an AI build take a ninja village you can sit and watch?
+**Question:** Can the Aseprite art and the prototype's living village carry over into Godot 4.7 and still read and run as well as in the browser? *(guessed)*
 
 **Hooks:** a steam train that runs through a ninja village; every sprite drawn in Aseprite by the AI
 
@@ -21,8 +26,8 @@ Change before build: i also want some npc running arround and maybe some small e
 
 ## Look and references
 - Look: isometric pixel art drawn in Aseprite *(you said)*. A hidden ninja village in a forest valley in the spirit of Konoha *(you said)*: packed round-walled towers and boxy blocks with warm terracotta and red-orange roofs, rooftop water tanks, washing lines and cloth banners, a tall plain cliff behind, giant broad-canopy trees around. Ninjas drawn anime-style: spiky or long hair, plain metal-plated headbands, sandals, kunai pouch, each villager type with its own silhouette. Warm afternoon sun, cool blue shadows, lit windows and lantern glow at night. Signature detail: rooftop water tanks and washing lines catching the light. 1 px dark outline, top-left light, no anti-aliasing. Every figure drawn, no emoji, no plain circles
-- References: Naruto's Konoha *(you said)*: the hidden-village-in-the-trees warmth, roof colours and shapes, anime ninja silhouettes
-- View: 2D isometric *(you said)* · Camera: a fixed 2:1 isometric view of the whole village on one screen, native 480×270 scaled up by whole numbers *(guessed)*
+- References: Naruto's Konoha *(you said)*: the hidden-village-in-the-trees warmth, roof colours and shapes, anime ninja silhouettes. Moonlighter and Chef RPG *(you said)*: the pixel-art craft, hue-shifted ramps, textured materials, coloured selective outlines, contact shadows, leaf-cluster trees and street clutter
+- View: 2D isometric *(you said)* · Camera: 64x32 tiles at native 480×270, scaled by whole numbers; it drifts slowly over the village and pans by drag or arrow keys *(you said: bigger, camera pans)*
 
 ## First minute
 It's early morning in the forest clearing. Villagers step out of their doors into the streets, kids start a game of tag in the square, and ninjas head for the training ground. The train whistles in from the left, slows, and stops at the station; passengers step off and others board. A ninja dashes across the rooftops, and a small event starts: a sparring match draws a crowd. Within the minute you've seen the whole loop of the village, and the train pulls out again.
@@ -39,15 +44,13 @@ None, by design *(you said)*. What builds over time is the day: morning commute,
 - No goal and no failure *(you said)*. A session feels complete after one full day: train, training, lanterns, sleep *(guessed)*
 
 ## Features
-- [x] One-screen isometric village, every sprite from Aseprite: block houses and round towers with water tanks, a training ground, the station, giant trees, lanterns, track and ground
-- [x] Steam train loops through, stops at the station, wheels animate, smoke puffs, villagers board and step off
-- [x] Ninja villagers walk routines between home, the training ground, the station, the shop and the square, with walk cycles in four directions
-- [x] Training ground with ninjas training (animated punch and kick poses)
-- [x] A rooftop ninja who dashes across the roofs now and then
-- [x] NPCs running around: kids playing tag, ninjas sprinting on errands
-- [x] Small events, each with a one-line log: a sparring match draws a crowd, a messenger hawk lands at the station, a cat chases a bird down the street, the lantern-lighter walks the streets at dusk *(guessed: which events)*
-- [x] Day and night cycle: lanterns glow at dusk, villagers go home at night *(guessed)*
-- [x] Idle controls: pause, speed, click a villager for name and task *(guessed)*
+- [ ] Isometric village scene in Godot from the Aseprite sprites: ground, houses and towers with water tanks, training ground, station, giant trees, lanterns, track, all depth-sorted correctly
+- [ ] Steam train loops through, stops at the station, wheels animate, smoke puffs, villagers board and step off
+- [ ] Villagers walk routines between home, the training ground, the station, the shop and the square, with four-direction walk cycles, and train at the training ground with punch and kick poses
+- [ ] NPCs running around: kids playing tag, ninjas sprinting on errands and dashing across the rooftops
+- [ ] Small events, each with a one-line log: sparring match with a crowd, messenger hawk, cat chasing a sparrow, the evening lantern round
+- [ ] Day and night cycle: lit windows and lantern glow at night, villagers go home *(guessed)*
+- [ ] Idle controls: pause, speed, click a villager for name and task *(guessed)*
 
 ## Your systems
 - train in the village · in the slice
@@ -61,19 +64,25 @@ None, by design *(you said)*. What builds over time is the day: morning commute,
 
 ## Avoid
 - any gameplay: no goals, money, building, losing or score *(you said: "we dont need any gameplay")*
-- art drawn in code instead of Aseprite (only the sky gradient and night tint are code)
-- Naruto's names, characters, the leaf symbol, the carved faces on the cliff, the village gate and its named buildings: the look guides the art, the series' designs stay its owner's
+- art drawn in code instead of Aseprite (only the night tint and glow are code)
+- Naruto's names, characters, the leaf symbol, the carved faces on the cliff, the village gate and its named buildings; Moonlighter's and Chef RPG's own art, characters and UI: the look guides the art, the series' designs stay its owner's
 
 ## Out of scope
 - several districts and a region map: grow it
 - placing buildings or laying track yourself: add it as a feature
-- the village in Godot: `/setup-engine godot` after you've played it
+- porting the prototype's JavaScript: the Godot build is written fresh in GDScript, and the browser prototype stays in `prototypes/shinobi-station/` as its reference *(guessed)*
 
 ## Build order
-1. The slice: one screen, Aseprite sprites, the train loop, walking villagers, the dojo, and one full day and night cycle with no end state
+1. Import the Aseprite sheets and lay out the isometric village with correct depth sorting at whole-number scale (the riskiest part)
+2. The train loop and the station
+3. Villager routines and pathfinding on the streets
+4. NPCs running around
+5. Small events and the log
+6. Day and night
+7. Idle controls and the HUD
 
 ---
-**Kill condition:** if the Aseprite sprites can't read as a ninja village at play size after one redraw pass *(guessed)*
+**Kill condition:** if the Godot scene can't match the browser prototype's look at whole-number scale after one pass *(guessed)*
 
 **Who it's for / what they feel:** you, testing an AI art pipeline, with a calm screen to leave running *(inferred (strong))*
 

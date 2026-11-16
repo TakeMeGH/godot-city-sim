@@ -31,7 +31,7 @@ const W = 480, H = 270;         // logical size: the pixel world's native resolu
 const PIXEL = true;             // pixel look: whole-number scale, no smoothing
 const FONT = '"Trebuchet MS", "Segoe UI", sans-serif';
 const TITLE = 'Shinobi Station';
-const CONTROLS = ['Nothing to do: just watch the village', 'Space: pause   1 / 2 / 3: speed', 'Click a villager: who they are', 'H: hide the HUD   R: new day   M: mute'];
+const CONTROLS = ['Nothing to do: just watch the village', 'Space: pause   1 / 2 / 3: speed   drag or arrows: look around', 'Click a villager: who they are', 'H: hide the HUD   R: new day   M: mute'];
 const clock = window.GAME_CLOCK || { now: () => performance.now() / 1000 }; // a check may inject one
 const CHEAP = params.get('render') === 'cheap';
 let seed;
@@ -78,11 +78,23 @@ addEventListener('keydown', e => {
   if (e.code === 'Space' || e.code.startsWith('Arrow')) e.preventDefault();
 });
 addEventListener('keyup', e => down.delete(e.code));
-let clickAt = null;
+let clickAt = null, drag = null, dragDelta = { x: 0, y: 0 };
+function toLogical(e) { const r = canvas.getBoundingClientRect(); return { x: (e.clientX - r.left) / r.width * W, y: (e.clientY - r.top) / r.height * H }; }
 canvas.addEventListener('pointerdown', e => {
   startAudio();
-  const r = canvas.getBoundingClientRect();
-  clickAt = { x: (e.clientX - r.left) / r.width * W, y: (e.clientY - r.top) / r.height * H };
+  const p = toLogical(e);
+  drag = { x: p.x, y: p.y, moved: 0 };
+});
+addEventListener('pointermove', e => {
+  if (!drag || !(e.buttons & 1)) return;
+  const p = toLogical(e);
+  dragDelta.x += p.x - drag.x; dragDelta.y += p.y - drag.y;
+  drag.moved += Math.abs(p.x - drag.x) + Math.abs(p.y - drag.y);
+  drag.x = p.x; drag.y = p.y;
+});
+addEventListener('pointerup', e => {
+  if (drag && drag.moved < 4) clickAt = toLogical(e);
+  drag = null;
 });
 addEventListener('blur', () => down.clear());
 
@@ -137,9 +149,19 @@ function spr(name, frame, x, y, flip = false, alpha = 1, g = wx) {
 
 // ---- The village map ---------------------------------------------------------------------
 const LAY = window.LAYOUT;
-const OX = LAY.OX, OY = LAY.OY, N = LAY.N, MAP = LAY.map, TRACK_J = LAY.trackJ;
+const N = LAY.N, MAP = LAY.map, TRACK_J = LAY.trackJ;
 const WALK = new Set(['#', '+', 'P', 'T']);
-function iso(i, j) { return [OX + (i - j) * 16, OY + (i + j) * 8]; }
+const TW = 32, TH = 16; // half a tile: the 64x32 tile's corner-to-centre offsets
+// world coordinates: the camera (state.cam) decides which part of the village is on screen
+function iso(i, j) { return [(i - j) * TW, (i + j) * TH]; }
+const TILE_INDEX = Object.fromEntries(LAY.tileNames.map((n, k) => [n, k]));
+function tileFrame(i, j) {
+  if (j === Math.floor(TRACK_J)) return TILE_INDEX.track;
+  if (i < 0 || j < 0 || i >= N || j >= N) return TILE_INDEX.forest;
+  const t = LAY.tileOf[MAP[j][i]];
+  if (t === 'grass' && ((i * 7 + j * 13) % 5 === 0)) return TILE_INDEX.grass_flowers;
+  return TILE_INDEX[t];
+}
 function walkable(i, j) { return i >= 0 && j >= 0 && i < N && j < N && WALK.has(MAP[j][i]); }
 const tiles = { street: [], plaza: [], platform: [], training: [], all: [] };
 for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) {
@@ -169,12 +191,11 @@ function bfs(from, to) {
   return path;
 }
 const pick = arr => arr[Math.floor(rng() * arr.length)];
-const ROOF = { house_cream: 18, house_tall: 27, house_grey: 15, house_hip: 22, tower: 21, shop: 16, water_tower: 40, tree_big: 46, tree_small: 30, station: 18 };
+const ROOF = { house_block: 30, shop: 30, house_hip: 40, tower: 40, tree_big: 72, tree_small: 40, station: 36 };
 const roofAt = {};
 for (const p of LAY.placements) {
   if (p.i < 0 || p.j < 0 || p.i > N || p.j > N) continue;
-  if (p.s === 'shop') { roofAt[`${Math.floor(p.i - 0.5)},${Math.floor(p.j)}`] = ROOF.shop; roofAt[`${Math.floor(p.i)},${Math.floor(p.j)}`] = ROOF.shop; continue; }
-  if (p.s === 'station') { for (let k = 6; k <= 8; k++) roofAt[`${k},9`] = ROOF.station; continue; }
+  if (p.s === 'station') { for (let k = 5; k <= 7; k++) roofAt[`${k},8`] = ROOF.station; continue; }
   if (ROOF[p.s]) roofAt[`${Math.floor(p.i)},${Math.floor(p.j)}`] = ROOF[p.s];
 }
 const lanterns = LAY.placements.filter(p => p.s === 'lantern').map(p => {
@@ -183,7 +204,7 @@ const lanterns = LAY.placements.filter(p => p.s === 'lantern').map(p => {
   return { i: p.i, j: p.j, spot: best, lit: false };
 });
 const shopDoors = LAY.doors.filter(d => d.kind === 'shop');
-const homeDoors = LAY.doors.filter(d => d.kind !== 'shop');
+const homeDoors = LAY.doors.filter(d => d.kind === 'home');
 
 // ---- People ------------------------------------------------------------------------------
 const NAMES = ['Haru', 'Ren', 'Kaito', 'Mio', 'Sora', 'Aki', 'Yuki', 'Daichi', 'Hina', 'Taro', 'Emi', 'Kenji', 'Nao', 'Rin', 'Shin', 'Asa', 'Kou', 'Mei', 'Jun', 'Saki', 'Toma', 'Ume', 'Riku', 'Nami', 'Goro', 'Fumi', 'Iku', 'Hoshi', 'Tetsu', 'Kiyo'];
@@ -252,7 +273,7 @@ function nextActivity(a) {
     const d = pick(shopDoors); a.activity = 'going shopping';
     goTo(a, d.door[0], d.door[1], () => linger(a, 'shopping', 3, 8), sp);
   } else if (choice === 2) {
-    const [i, j] = pick(tiles.platform.filter(([i]) => i >= 3)); a.activity = 'going to the station';
+    const [i, j] = pick(tiles.platform.filter(([i]) => i >= 2)); a.activity = 'going to the station';
     goTo(a, i, j, () => { a.state = 'wait'; a.activity = 'waiting for the train'; a.timer = 40 + rng() * 30; }, sp);
   } else if (choice === 3) {
     const [i, j] = pick(tiles.plaza); a.activity = 'strolling to the square';
@@ -322,6 +343,7 @@ function reset() {
     smoke: [], event: null, eventTimer: tune.first_event, eventIdx: 0,
     roof: null, roofTimer: 8, lighter: null, lanternsOn: false,
     tagIt: 0, critters: [],
+    cam: { x: iso(N / 2, N / 2)[0], y: iso(N / 2, N / 2)[1] - 20, idle: 99, t: 0 },
   };
   for (const l of lanterns) l.lit = false;
   const R = tune.residents;
@@ -371,9 +393,9 @@ function startEvent(kind) {
     const watchers = freeAgents(a => a !== A && a !== B).slice(0, 4);
     const ev = { kind, A, B, watchers, phase: 'gather', t: 0, ready: 0 };
     for (const a of [A, B]) a.lock = 'spar';
-    goTo(A, 9, 2, () => { ev.ready++; A.i = 9.1; A.j = 2.0; A.flip = true; A.back = false; A.activity = `sparring with ${B.name}`; }, tune.run_speed);
-    goTo(B, 10, 1, () => { ev.ready++; B.i = 10.0; B.j = 1.1; B.flip = false; B.back = false; B.activity = `sparring with ${A.name}`; }, tune.run_speed);
-    const spots = [[8, 3], [9, 3], [10, 3], [11, 3], [11, 2]];
+    goTo(A, 8, 2, () => { ev.ready++; A.i = 8.6; A.j = 2.0; A.flip = true; A.back = false; A.activity = `sparring with ${B.name}`; }, tune.run_speed);
+    goTo(B, 9, 1, () => { ev.ready++; B.i = 9.5; B.j = 1.1; B.flip = false; B.back = false; B.activity = `sparring with ${A.name}`; }, tune.run_speed);
+    const spots = [[7, 3], [8, 3], [10, 3], [11, 3], [6, 3]];
     watchers.forEach((w, k) => {
       w.lock = 'watch';
       goTo(w, spots[k][0], spots[k][1], () => { w.back = true; w.flip = k % 2 === 1; w.state = 'idle'; w.timer = 999; w.activity = 'watching the match'; }, tune.walk_speed * 1.3);
@@ -382,13 +404,13 @@ function startEvent(kind) {
     state.event = ev; return true;
   }
   if (kind === 'hawk') {
-    const [sx, sy] = iso(7.6, 9.5);
-    const ev = { kind, phase: 'in', x: W + 20, y: 20, tx: sx - 2, ty: sy - 30, t: 0, runner: null };
+    const [sx, sy] = iso(6.0, 8.5);
+    const ev = { kind, phase: 'in', x: state.cam.x + W / 2 + 30, y: state.cam.y - H / 2 + 20, tx: sx - 4, ty: sy - 44, t: 0, runner: null };
     log('A messenger hawk circles over the village');
     state.event = ev; return true;
   }
   if (kind === 'cat') {
-    const bt = pick(tiles.street.filter(([i, j]) => j === 7 && i >= 7));
+    const bt = pick(tiles.street.filter(([i, j]) => j === 7 && i >= 6));
     const ct = [1, 7];
     const ev = {
       kind, phase: 'chase', t: 0,
@@ -431,7 +453,7 @@ function updateEvent(dt) {
       ev.A.pose = [8, 0, 9, 1][beat % 4]; ev.B.pose = [0, 9, 1, 8][beat % 4];
       ev.A.state = ev.B.state = 'idle'; ev.A.timer = ev.B.timer = 999;
       const lunge = Math.sin(ev.t * 4) * 0.08;
-      ev.A.i = 9.1 + lunge; ev.A.j = 2.0 - lunge; ev.B.i = 10.0 - lunge; ev.B.j = 1.1 + lunge;
+      ev.A.i = 8.6 + lunge; ev.A.j = 2.0 - lunge; ev.B.i = 9.5 - lunge; ev.B.j = 1.1 + lunge;
       if (beat % 4 === 0 && Math.floor((ev.t - dt) / 0.32) % 4 === 3) tone(180 + rng() * 60, 0.05, 'square', 0.05);
       if (ev.t > tune.spar_seconds) {
         const win = rng() < 0.5 ? ev.A : ev.B;
@@ -462,7 +484,7 @@ function updateEvent(dt) {
         if (ev.runner) log(`${ev.runner.name} takes the message. The hawk flies off`);
       }
     } else if (ev.phase === 'out') {
-      if (fly(-30, 10, 80)) endEvent();
+      if (fly(state.cam.x - W / 2 - 40, state.cam.y - H / 2 + 10, 80)) endEvent();
     }
   }
   if (ev.kind === 'cat') {
@@ -495,7 +517,7 @@ function updateRoof(dt) {
     state.roofTimer -= dt;
     if (state.roofTimer <= 0) {
       const runner = freeAgents(a => a.sprite === 'ninja');
-      const j = pick([1, 4, 5, 6, 8]);
+      const j = pick([0, 2, 5, 6]);
       state.roof = { j, i: -1.5, name: runner.length ? runner[0].name : 'A ninja', trail: [] };
       if (rng() < 0.5) log(`A ninja dashes across the rooftops`);
     }
@@ -596,7 +618,7 @@ function updateKid(a, kids, dt) {
       const it = kids.find(k => k.it);
       let best = null, bs = -1;
       for (let k = 0; k < 6; k++) {
-        const cand = pick(tiles.all.filter(([i, j]) => Math.abs(i - 5) + Math.abs(j - 7) <= 5));
+        const cand = pick(tiles.all.filter(([i, j]) => Math.abs(i - 4) + Math.abs(j - 7) <= 5));
         const s = it ? Math.hypot(cand[0] - it.i, cand[1] - it.j) : rng();
         if (s > bs) { bs = s; best = cand; }
       }
@@ -650,13 +672,13 @@ function updateTrain(dt) {
   tr.puff -= dt;
   if (tr.state !== 'wait' && tr.puff <= 0) {
     tr.puff = tr.v > 0.5 ? 0.16 : 0.5;
-    const [x, y] = iso(tr.s - 0.55, TRACK_J);
-    state.smoke.push({ x: x + (rng() - 0.5) * 2, y: y - 27, age: 0 });
+    const [x, y] = iso(tr.s - 0.6, TRACK_J);
+    state.smoke.push({ x: x + (rng() - 0.5) * 2, y: y - 38, age: 0 });
   }
 }
 function trainArrived(tr) {
   const back = state.agents.filter(a => a.state === 'away' && a.boardedOn < tr.id);
-  const plat = tiles.platform.filter(([i]) => i >= 3);
+  const plat = tiles.platform.filter(([i]) => i >= 2);
   back.forEach((a, k) => {
     const [i, j] = plat[k % plat.length];
     a.visible = true; a.state = 'idle'; a.i = i + 0.5 + a.off[0]; a.j = j + 0.6; a.timer = 0.5 + k * 0.4; a.activity = 'just off the train';
@@ -671,11 +693,46 @@ function boardTrain(tr) {
   if (boarders.length) log(`${boarders.length === 1 ? boarders[0].name + ' boards' : boarders.length + ' board'} the train`);
 }
 
+// ---- Camera: drag or arrow keys to look around; it drifts on its own after a pause ---------
+function updateCamera(dt) {
+  const c = state.cam;
+  c.t += dt;
+  let manual = false;
+  const sp = tune.pan_speed * dt;
+  if (down.has('ArrowLeft')) { c.x -= sp; manual = true; }
+  if (down.has('ArrowRight')) { c.x += sp; manual = true; }
+  if (down.has('ArrowUp')) { c.y -= sp; manual = true; }
+  if (down.has('ArrowDown')) { c.y += sp; manual = true; }
+  if (dragDelta.x || dragDelta.y) { c.x -= dragDelta.x; c.y -= dragDelta.y; dragDelta.x = dragDelta.y = 0; manual = true; }
+  c.idle = manual ? 0 : c.idle + dt;
+  if (c.idle > tune.drift_after) {
+    const [mx, my] = iso(N / 2, N / 2);
+    const tx = mx + tune.drift_x * Math.sin(c.t * 0.045), ty = my - 30 + tune.drift_y * Math.sin(c.t * 0.031 + 1);
+    const k = Math.min(1, dt * 0.35);
+    c.x += (tx - c.x) * k; c.y += (ty - c.y) * k;
+  }
+  const [cx, cy] = iso(N / 2, N / 2);
+  c.x = Math.max(cx - tune.cam_range_x, Math.min(cx + tune.cam_range_x, c.x));
+  c.y = Math.max(cy - tune.cam_range_y - 40, Math.min(cy + tune.cam_range_y, c.y));
+}
+
 // ---- Drawing -------------------------------------------------------------------------------
 function drawWorld() {
   const t = state.time, light = daylight(t), nightAmt = (1 - light) * tune.night_strength, night = light < 0.5;
   wx.fillStyle = '#1b2a22'; wx.fillRect(0, 0, W, H);
-  spr('background', 0, 0, 0);
+  // camera: world point state.cam is the centre of the screen
+  const camX = Math.round(state.cam.x - W / 2), camY = Math.round(state.cam.y - H / 2);
+  wx.save(); wx.translate(-camX, -camY);
+  // ground tiles, back to front
+  for (let s = -8; s <= 2 * N + 8; s++) {
+    for (let i = -6; i <= N + 6; i++) {
+      const j = s - i;
+      if (j < -6 || j > N + 6) continue;
+      const [x, y] = iso(i, j);
+      if (x + 32 < camX || x - 32 > camX + W || y + 32 < camY || y > camY + H) continue;
+      spr('tiles', tileFrame(i, j), x, y);
+    }
+  }
   const list = [];
   for (const p of LAY.placements) {
     const isLantern = p.s === 'lantern';
@@ -683,6 +740,7 @@ function drawWorld() {
     if (isLantern) { const l = lanterns.find(q => q.i === p.i && q.j === p.j); frame = l && l.lit ? 1 : 0; }
     else if (SP[p.s] && SP[p.s].frames === 2 && night) frame = 1;
     const [x, y] = iso(p.i, p.j);
+    if (x + 80 < camX || x - 80 > camX + W || y - 110 > camY + H || y + 20 < camY) continue;
     list.push({ k: p.i + p.j, x, y, draw: () => spr(p.s, frame, x, y) });
   }
   for (const a of state.agents) {
@@ -726,8 +784,9 @@ function drawWorld() {
   for (const p of state.smoke) spr('smoke', Math.min(2, Math.floor(p.age / 0.6)), p.x, p.y, false, Math.max(0, 0.9 - p.age / 2.4));
   if (ev && ev.kind === 'hawk') spr('hawk', ev.phase === 'perch' ? 1 : Math.floor(ev.t * 6) % 2, ev.x, ev.y, ev.phase !== 'out');
   if (ev && ev.kind === 'cat' && ev.bird.fly) spr('bird', ev.bird.f, ev.bird.x, ev.bird.y);
+  wx.restore();
 
-  // night tint, dusk warmth, lamp glow
+  // night tint, dusk warmth, lamp glow (lamps are placed in world space, so they shift by the camera)
   const w = warmth(t);
   if (nightAmt > 0.01 || w > 0.01) {
     wx.globalCompositeOperation = 'multiply';
@@ -743,9 +802,10 @@ function drawWorld() {
       wx.fillStyle = gr; wx.fillRect(x - rad, y - rad, rad * 2, rad * 2);
     };
     const k = nightAmt / Math.max(0.1, tune.night_strength);
-    for (const l of lanterns) if (l.lit) { const [x, y] = iso(l.i, l.j); glow(x + 5, y - 16, 22, 0.32 * k, '255,160,80'); }
-    for (const p of LAY.placements) if (/house|tower|shop|station/.test(p.s)) { const [x, y] = iso(p.i, p.j); glow(x - 6, y - 12, 14, 0.1 * k, '255,200,120'); }
-    if (tr.state !== 'wait') { const [x, y] = iso(tr.s, TRACK_J); glow(x + 4, y - 10, 26, 0.35 * k, '255,230,150'); }
+    const at = (i, j) => { const [x, y] = iso(i, j); return [x - camX, y - camY]; };
+    for (const l of lanterns) if (l.lit) { const [x, y] = at(l.i, l.j); glow(x + 7, y - 20, 34, 0.34 * k, '255,160,80'); }
+    for (const p of LAY.placements) if (/house|tower|shop|station/.test(p.s)) { const [x, y] = at(p.i, p.j); glow(x - 12, y - 22, 22, 0.12 * k, '255,200,120'); glow(x + 14, y - 22, 18, 0.08 * k, '255,200,120'); }
+    if (tr.state !== 'wait') { const [x, y] = at(tr.s, TRACK_J); glow(x + 6, y - 16, 40, 0.38 * k, '255,230,150'); }
     wx.globalCompositeOperation = 'source-over';
   }
 }
@@ -767,12 +827,13 @@ function drawHud() {
       ctx.globalAlpha = 1;
     });
     panel(W - 176, H - 16, 172, 12, 0.45);
-    text('Space pause · 1 2 3 speed · click a villager · H hide', W - 90, H - 10, 5.5, '#cfd6e6', 'center', '500');
+    text('Space pause · 1 2 3 speed · drag or arrows to look · click a villager · H hide', W - 90, H - 10, 5, '#cfd6e6', 'center', '500');
   }
   const a = state.selected;
   if (a && a.visible && a.sx !== undefined) {
     const label = `${a.name}: ${a.activity}`;
-    const w = 10 + label.length * 3.4, x = Math.max(4, Math.min(W - w - 4, a.sx - w / 2)), y = a.sy - SP[a.sprite].h - 18;
+    const ax = a.sx - (state.cam.x - W / 2), ay = a.sy - (state.cam.y - H / 2);
+    const w = 10 + label.length * 3.4, x = Math.max(4, Math.min(W - w - 4, ax - w / 2)), y = Math.max(36, ay - SP[a.sprite].h - 14);
     panel(x, y, w, 12, 0.78);
     text(label, x + w / 2, y + 6, 6, '#ffe39a', 'center', '600');
   }
@@ -787,13 +848,14 @@ const scenes = {
       const units = [['ninja', 0, 'ninja'], ['ninja', 4, 'ninja (back)'], ['ninja', 8, 'ninja punch'], ['kunoichi', 0, 'kunoichi'], ['kunoichi', 4, 'kunoichi (back)'],
         ['elder', 0, 'elder'], ['elder', 4, 'elder (back)'], ['kid', 0, 'kid'], ['cat', 0, 'cat'], ['bird', 0, 'sparrow'], ['hawk', 0, 'hawk']];
       wx.save(); wx.scale(2, 2);
-      units.forEach(([n, f, label], k) => spr(n, f, 14 + k * 20, 44));
+      const pos = k => [18 + (k % 6) * 38, k < 6 ? 34 : 74];
+      units.forEach(([n, f, label], k) => { const [x, y] = pos(k); spr(n, f, x, y); });
       wx.restore();
-      spr('loco', 0, 120, 140); spr('car', 0, 270, 140);
+      spr('loco', 0, 120, 196); spr('car', 0, 300, 196);
       ctx.drawImage(wc, 0, 0, W, H);
-      units.forEach(([n, f, label], k) => text(label, (14 + k * 20) * 2, 96, 5.5, '#f3ead6', 'center', '500'));
-      text('locomotive', 145, 222, 6, '#f3ead6'); text('carriage', 292, 222, 6, '#f3ead6');
-      text('Every figure here was drawn in Aseprite', W / 2, 250, 7, '#ffd27a');
+      units.forEach(([n, f, label], k) => { const [x, y] = pos(k); text(label, x * 2, y * 2 + 8, 5.5, '#f3ead6', 'center', '500'); });
+      text('locomotive', 150, 228, 6, '#f3ead6'); text('carriage', 330, 228, 6, '#f3ead6');
+      text('Every figure here was drawn in Aseprite', W / 2, 258, 7, '#ffd27a');
       return true;
     },
   },
@@ -801,6 +863,7 @@ const scenes = {
     update(dt) {
       if (pressed('Enter') || pressed('Space') || clickAt) { clickAt = null; scene = 'play'; log('You arrive at the village'); }
       simulate(dt * 0.5);
+      updateCamera(dt);
     },
     draw() {
       drawWorld(); ctx.drawImage(wc, 0, 0, W, H);
@@ -824,14 +887,16 @@ const scenes = {
         let best = null, bd = 1e9;
         for (const a of state.agents) {
           if (!a.visible || a.sx === undefined) continue;
-          const dx = clickAt.x - a.sx, dy = clickAt.y - (a.sy - 9);
+          const wxp = clickAt.x + state.cam.x - W / 2, wyp = clickAt.y + state.cam.y - H / 2;
+          const dx = wxp - a.sx, dy = wyp - (a.sy - 12);
           const d = Math.hypot(dx, dy * 0.8);
-          if (d < 11 && d < bd) { bd = d; best = a; }
+          if (d < 14 && d < bd) { bd = d; best = a; }
         }
         state.selected = best; state.selectTimer = best ? 8 : 0; clickAt = null;
       }
       const n = state.speed;
       for (let k = 0; k < n; k++) simulate(dt);
+      updateCamera(dt);
     },
     draw() { drawWorld(); ctx.drawImage(wc, 0, 0, W, H); drawHud(); },
   },
