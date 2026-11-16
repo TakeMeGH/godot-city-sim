@@ -23,3 +23,8 @@
 | 012 | Market street | Integration | Complete | N/A |
 | 013 | Academy with a swing tree | Integration | Complete | N/A |
 | 014 | Edge places | Integration | Complete | N/A |
+| 015 | Height: a cliff and a raised terrace | Integration | Ready | N/A |
+| 016 | Cast shadows and wall shading | Visual/Feel | Ready | N/A |
+| 017 | Ground detail | Visual/Feel | Ready | N/A |
+| 018 | Ambient motion | Visual/Feel | Ready | N/A |
+| 019 | Lighting and colour | Visual/Feel | Ready | N/A |

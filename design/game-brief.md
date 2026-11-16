@@ -26,7 +26,7 @@ Brainstorm (Godot version): picked "as built": the browser prototype's village, 
 
 ## Look and references
 - Look: isometric pixel art drawn in Aseprite *(you said)*. A hidden ninja village in a forest valley in the spirit of Konoha *(you said)*: packed round-walled towers and boxy blocks with warm terracotta and red-orange roofs, rooftop water tanks, washing lines and cloth banners, a tall plain cliff behind, giant broad-canopy trees around. Ninjas drawn anime-style: spiky or long hair, plain metal-plated headbands, sandals, kunai pouch, each villager type with its own silhouette. Warm afternoon sun, cool blue shadows, lit windows and lantern glow at night. Signature detail: rooftop water tanks and washing lines catching the light. 1 px dark outline, top-left light, no anti-aliasing. Every figure drawn, no emoji, no plain circles
-- References: Naruto's Konoha *(you said)*: the hidden-village-in-the-trees warmth, roof colours and shapes, anime ninja silhouettes. Moonlighter and Chef RPG *(you said)*: the pixel-art craft, hue-shifted ramps, textured materials, coloured selective outlines, contact shadows, leaf-cluster trees and street clutter
+- References: Naruto's Konoha *(you said)*: the hidden-village-in-the-trees warmth, roof colours and shapes, anime ninja silhouettes. Moonlighter and Chef RPG *(you said)*: the pixel-art craft, hue-shifted ramps, textured materials, coloured selective outlines, contact shadows, leaf-cluster trees and street clutter. Kingdom Two Crowns and Potion Permit *(you said: the scene feels flat next to them)*: layered light and shadow, ambient motion, rich ground detail and depth
 - View: 2D isometric *(you said)* · Camera: 64x32 tiles at native 480×270, scaled by whole numbers; it drifts slowly over the village and pans by drag or arrow keys *(you said: bigger, camera pans)*
 
 ## First minute
@@ -58,6 +58,11 @@ None, by design *(you said)*. What builds over time is the day: morning commute,
 - [x] Market street: a ramen stand with banners, a flower shop and a tea house, where villagers eat and browse
 - [x] Academy with a yard and a swing tree; kids gather there by day
 - [x] Edge places: a training ground with three posts and a memorial stone, a fenced forest, a river with an arched bridge, and a hospital
+- [ ] Height: a plain cliff along the back of the village and one raised terrace with retaining walls and stairs that villagers climb
+- [ ] Cast shadows: buildings, trees, props and villagers cast soft shadows on the ground from one sun direction that moves with the time of day, plus darkening where walls meet the ground
+- [ ] Ground detail: soft edges where grass meets dirt, cobble and sand, and scattered tufts, pebbles, flowers, fallen leaves and worn path edges
+- [ ] Ambient motion: drifting cloud shadows, swaying trees, shimmering water, fluttering banners and laundry, chimney smoke, birds, falling leaves, and fireflies at night
+- [ ] Lighting and colour: warm light and cool shadow grading through the day, haze toward the back, a soft vignette, and bloom on lanterns and windows at night
 
 ## Your systems
 - train in the village · in the slice
@@ -71,8 +76,8 @@ None, by design *(you said)*. What builds over time is the day: morning commute,
 
 ## Avoid
 - any gameplay: no goals, money, building, losing or score *(you said: "we dont need any gameplay")*
-- art drawn in code instead of Aseprite (only the night tint and glow are code)
-- Naruto's names, characters, the leaf symbol, the carved faces on the cliff, the village gate and its named buildings; Moonlighter's and Chef RPG's own art, characters and UI: the look guides the art, the series' designs stay its owner's
+- art drawn in code when Aseprite does it as well: sprites stay drawn in Aseprite, but code is fine where it is the better way, such as lighting, shadows, motion and effects *(you said: "i dont avoid art using code if there is the better way")*
+- Naruto's names, characters, the leaf symbol, the carved faces on the cliff, the village gate and its named buildings; Moonlighter's, Chef RPG's, Kingdom Two Crowns' and Potion Permit's own art, characters and UI: the look guides the art, the series' designs stay its owner's
 
 ## Out of scope
 - a region map beyond the one village: grow it
@@ -90,6 +95,7 @@ None, by design *(you said)*. What builds over time is the day: morning commute,
 8. The bigger village map in districts, with the wall (map first: everything else is placed on it)
 9. Building variety, then villager variety
 10. The landmarks: main gate, market street, academy, then the edge places
+11. The atmosphere pass: height first (it changes the map), then cast shadows, ground detail, ambient motion, and lighting and colour last (it grades everything else)
 
 ---
 **Kill condition:** if the Godot scene can't match the browser prototype's look at whole-number scale after one pass *(guessed)*
