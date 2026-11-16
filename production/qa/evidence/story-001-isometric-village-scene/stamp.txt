@@ -1,0 +1,6 @@
+Reviewed-Content-Hash: src/village/village_scene.gd a86a2df69e15a01baac6deff4b9f71b85750979f
+Reviewed-Content-Hash: src/village/camera_rig.gd 44fc572093aba79dd2e6d3b258e5b71809818326
+Reviewed-Content-Hash: src/village/village_scene.tscn 69e05d23c32929548467972b91ab79fc8d46893e
+Reviewed-Content-Hash: assets/data/village_layout.json a031b1d957ece5525c27978f29f0e94a706436ee
+Reviewed-Content-Hash: assets/data/village_tuning.json 7393106b9d955b848d75d735b59649f5450db492
+Reviewed-Content-Hash: project.godot 0980e4dbf8ac4da2453fc07c8f67b30101b6d953

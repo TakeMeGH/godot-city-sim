@@ -1,0 +1,5 @@
+Reviewed-Content-Hash: src/train/train.gd d4a1299d274a42862addd97328671414af4acc1d
+Reviewed-Content-Hash: src/train/smoke_puff.gd 97d555e876bc41c2d5914a6979a0713391addea6
+Reviewed-Content-Hash: src/train/train.tscn 2e27eae9517a50579fd4c175866dfa34c3635c6d
+Reviewed-Content-Hash: src/village/village_scene.tscn 55caa5284c21098fbeb19962a412c759a87b32ac
+Reviewed-Content-Hash: assets/data/village_tuning.json fc9143b8b8a6e2355de9d6a5d3ccfa72c730c672

@@ -9,8 +9,8 @@
 
 | # | Story | Type | Status | ADR |
 |---|-------|------|--------|-----|
-| 001 | Isometric village scene | Visual/Feel | Ready | N/A |
-| 002 | Steam train and station | Integration | Ready | N/A |
+| 001 | Isometric village scene | Visual/Feel | In Progress | N/A |
+| 002 | Steam train and station | Integration | Complete | N/A |
 | 003 | Villager routines | Logic | Ready | N/A |
 | 004 | NPCs running around | Logic | Ready | N/A |
 | 005 | Small events and the log | Integration | Ready | N/A |

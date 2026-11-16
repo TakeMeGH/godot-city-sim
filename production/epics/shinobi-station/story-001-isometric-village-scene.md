@@ -1,13 +1,13 @@
 # Story 001: Isometric village scene
 
 > **Epic**: Shinobi Station
-> **Status**: Ready
+> **Status**: In Progress
 > **Layer**: Foundation
 > **Type**: Visual/Feel
 > **Estimate**: L
 > **Build step**: core
 > **Manifest Version**: N/A (minimal — no control manifest)
-> **Last Updated**: [set by /dev-story when implementation begins]
+> **Last Updated**: 2026-11-16
 
 ## Context
 
@@ -63,14 +63,13 @@
 
 ## Files
 
-- `src/village/village_scene.tscn`
-- `src/village/village_scene.gd`
-- `src/village/camera_rig.gd`
-- `assets/art/` (the Aseprite PNG sheets and sources)
-- `assets/data/village_layout.json`
-- `assets/data/village_tuning.json`
-
----
+- `src/village/village_scene.tscn` — created (main scene: Ground, y-sorted World, CameraRig)
+- `src/village/village_scene.gd` — created (map, ground tiles, placements, Lantern.set_lit, add_entity, tile_to_world)
+- `src/village/camera_rig.gd` — created (drift, drag and arrow-key pan, clamp, --cam / --freeze-camera)
+- `assets/data/village_layout.json` — created (map, legend, placements, doors, sprite table)
+- `assets/data/village_tuning.json` — created (camera values)
+- `assets/art/*.png`, `assets/art/src/*.aseprite` — created (25 sheets and sources from the prototype)
+- `project.godot` — modified (main scene, 480x270 viewport, integer scaling, nearest filter, pixel snap)
 
 ## QA Test Cases
 
