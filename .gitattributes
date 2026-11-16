@@ -27,3 +27,15 @@
 # .gitattributes governs the INDEX. It does not retro-fix a working tree that
 # predates the rule -- run `git add --renormalize .` for that.
 .claude/**/*.md text eol=lf
+
+# Godot text resources live at the repo root now (project.godot, addons/,
+# *.import), outside src/.gitattributes. Keep them LF like the editor writes
+# them, so a Windows checkout does not churn every scene and script.
+*.gd text eol=lf
+*.gdshader text eol=lf
+*.tscn text eol=lf
+*.tres text eol=lf
+*.godot text eol=lf
+*.import text eol=lf
+*.cfg text eol=lf
+*.uid text eol=lf

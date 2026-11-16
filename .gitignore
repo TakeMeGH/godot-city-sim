@@ -75,7 +75,7 @@ export_presets.cfg
 **/.mono/
 **/mono_crash.*.json
 
-# === Godot AI plugin (src/addons/godot_ai) ===
+# === Godot AI plugin (addons/godot_ai) ===
 # The plugin itself IS committed so every clone gets the MCP bridge.
 # Its self-updater keeps staging, backups and activation state here: local only.
 **/addons/.godot_ai_update/

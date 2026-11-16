@@ -1,7 +1,0 @@
-# Godot 4+ specific ignores
-# Ignore the CONTENTS of .godot/ rather than the folder itself, so the class
-# registry below can be re-included (git cannot re-include a file whose parent
-# directory is ignored). See the Godot section of the root .gitignore.
-.godot/*
-!.godot/global_script_class_cache.cfg
-/android/
