@@ -52,7 +52,7 @@ const TUNING_KEYS: Array[String] = [
 	"rooftop_rows", "rooftop_start_i", "rooftop_end_margin", "rooftop_hop", "rooftop_sprite",
 	"rooftop_frames", "rooftop_frame_rate", "rooftop_afterimages", "rooftop_sort_ahead", "roof_heights",
 ]
-const LAYOUT_KEYS: Array[String] = ["size", "placements", "sprites"]
+const LAYOUT_KEYS: Array[String] = ["size", "sprites"]
 ## Sprite-table key of a building variant's roof height (story 009).
 const ROOF_HEIGHT_KEY: String = "roof_height"
 
@@ -108,11 +108,11 @@ func _setup() -> void:
 	_end_i = size + _t("rooftop_end_margin")
 	var heights: Dictionary = _tuning["roof_heights"]
 	var table: Dictionary = layout["sprites"]
-	var placements: Array = layout["placements"]
-	for entry: Dictionary in placements:
-		var i: float = float(entry["i"])
-		var j: float = float(entry["j"])
-		var sprite_name: String = entry["sprite"]
+	for node: PlacedSprite in village.placed_nodes():
+		var tile: Vector2 = village.tile_of(node)
+		var i: float = tile.x
+		var j: float = tile.y
+		var sprite_name: String = node.sprite_name
 		var info: Dictionary = table.get(sprite_name, {})
 		var has_roof: bool = info.has(ROOF_HEIGHT_KEY) or heights.has(sprite_name)
 		if has_roof and i >= 0.0 and j >= 0.0 and i <= size and j <= size:

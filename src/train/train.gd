@@ -56,7 +56,7 @@ const TUNING_KEYS: Array[String] = [
 	"smoke_drift_x", "smoke_drift_y", "smoke_life", "smoke_frame_seconds", "smoke_alpha",
 	"smoke_fade_seconds", "whistle_volume", "whistle_attack", "whistle_end_gain", "whistle_tones",
 ]
-const LAYOUT_KEYS: Array[String] = ["track_row", "map", "tile_legend", "sprites"]
+const LAYOUT_KEYS: Array[String] = ["track_row", "size", "sprites"]
 const LOCO_SPRITE: String = "loco"
 const CAR_SPRITE: String = "car"
 const SMOKE_SPRITE: String = "smoke"
@@ -223,19 +223,14 @@ func _spawn_puff() -> void:
 
 
 func _find_platform_tiles(layout: Dictionary) -> void:
-	var legend: Dictionary = layout["tile_legend"]
-	var platform_key: Variant = legend.find_key(TILE_PLATFORM)
-	if platform_key == null:
-		push_error("Train: %s tile_legend has no '%s' entry" % [VillageScene.LAYOUT_PATH, TILE_PLATFORM])
-		return
-	var platform_char: String = platform_key
-	var rows: Array = layout["map"]
+	var size: int = int(layout["size"])
 	var min_i: int = int(_tuning["train_platform_min_i"])
-	for j: int in rows.size():
-		var row: String = rows[j]
-		for i: int in range(min_i, row.length()):
-			if row[i] == platform_char:
+	for j: int in size:
+		for i: int in range(min_i, size):
+			if village.tile_name(i, j) == TILE_PLATFORM:
 				_platform_tiles.append(Vector2i(i, j))
+	if _platform_tiles.is_empty():
+		push_error("Train: the ground has no '%s' tiles from i=%d" % [TILE_PLATFORM, min_i])
 
 
 ## Renders the two-tone whistle (prototype whistle(): triangle tones, each with a

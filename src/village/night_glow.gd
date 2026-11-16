@@ -101,7 +101,7 @@ func _setup() -> void:
 	_material.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 	var lantern_spec: Dictionary = _tuning["lantern_glow"]
 	_lantern_alpha = float(lantern_spec["alpha"])
-	for lantern: VillageScene.Lantern in village.lanterns:
+	for lantern: Lantern in village.lanterns:
 		_lantern_glows.append(_add_glow(lantern_spec, lantern.position))
 	var storey_px: float = _t("storey_px")
 	for building: Sprite2D in village.buildings:

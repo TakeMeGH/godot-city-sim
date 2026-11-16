@@ -148,7 +148,7 @@ const TUNING_KEYS: Array[String] = [
 	"market_stations", "station_on_after_wake", "station_shift_stagger", "ramen_role", "ramen_seat_facing",
 	"ramen_min", "ramen_max", "browse_spots", "browse_min", "browse_max", "academy_stations",
 ]
-const LAYOUT_KEYS: Array[String] = ["size", "map", "tile_legend", "doors", "sprites"]
+const LAYOUT_KEYS: Array[String] = ["size", "sprites"]
 const KEY_CAT_ROW: String = "cat_bird_row"
 const KEY_CAT_MIN_I: String = "cat_bird_min_i"
 const KEY_CAT_MAX_I: String = "cat_bird_max_i"
@@ -567,14 +567,13 @@ func _setup() -> void:
 		get_tree().quit(1)
 		return
 	rng.seed = int(_tuning["villager_seed"])
-	paths = VillagePaths.new(layout["map"], layout["tile_legend"], _tuning["walk_tiles"])
+	paths = VillagePaths.new(int(layout["size"]), village.tile_name, _tuning["walk_tiles"])
 	var min_i: int = int(_tuning["train_platform_min_i"])
 	for tile: Vector2i in paths.tiles_of(TILE_PLATFORM):
 		if tile.x >= min_i:
 			_platform_tiles.append(tile)
 	var home_doors: Array[Vector2i] = []
-	var doors: Array = layout["doors"]
-	for door: Dictionary in doors:
+	for door: Dictionary in village.doors:
 		var door_tile: Vector2i = Vector2i(int(door["door"][0]), int(door["door"][1]))
 		if door["kind"] == DOOR_HOME:
 			home_doors.append(door_tile)
@@ -610,8 +609,7 @@ func _check_map(layout: Dictionary) -> void:
 		push_error("VillagerRoutines: the map has no '%s' tiles, so doors cannot be checked" % TILE_PLAZA)
 		return
 	var plaza: Vector2i = plaza_tiles[0]
-	var doors: Array = layout["doors"]
-	for door: Dictionary in doors:
+	for door: Dictionary in village.doors:
 		var door_tile: Vector2i = Vector2i(int(door["door"][0]), int(door["door"][1]))
 		if door_tile != plaza and (not paths.is_walkable(door_tile) or paths.find_path(plaza, door_tile).is_empty()):
 			push_error("VillagerRoutines: door %s of the building at (%d, %d) is not reachable from the plaza"

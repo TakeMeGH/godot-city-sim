@@ -6,7 +6,7 @@ extends RefCounted
 ##
 ## Example:
 ## [codeblock]
-## var paths: VillagePaths = VillagePaths.new(layout["map"], layout["tile_legend"], ["dirt", "cobble"])
+## var paths: VillagePaths = VillagePaths.new(village.map_size(), village.tile_name, ["dirt", "cobble"])
 ## var steps: Array[Vector2i] = paths.find_path(Vector2i(0, 3), Vector2i(4, 7))
 ## [/codeblock]
 
@@ -18,11 +18,12 @@ var _grid: AStarGrid2D = AStarGrid2D.new()
 var _tiles_by_name: Dictionary = {}
 
 
-## Builds the grid from the layout's [param map] rows and [param legend]
-## (map char -> tile name). Tiles whose name is in [param walk_tile_names] are walkable.
-func _init(map: Array, legend: Dictionary, walk_tile_names: Array) -> void:
-	var first_row: String = map[0]
-	_grid.region = Rect2i(0, 0, first_row.length(), map.size())
+## Builds the grid over the [param size] x [param size] village square. [param tile_name_at]
+## is called as [code]tile_name_at(i, j) -> String[/code] for each tile's name (normally
+## [method VillageScene.tile_name], which reads the painted ground). Tiles whose name is in
+## [param walk_tile_names] are walkable.
+func _init(size: int, tile_name_at: Callable, walk_tile_names: Array) -> void:
+	_grid.region = Rect2i(0, 0, size, size)
 	_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	_grid.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
 	_grid.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
@@ -30,11 +31,10 @@ func _init(map: Array, legend: Dictionary, walk_tile_names: Array) -> void:
 	for tile_name: Variant in walk_tile_names:
 		var list: Array[Vector2i] = []
 		_tiles_by_name[tile_name] = list
-	for j: int in map.size():
-		var row: String = map[j]
-		for i: int in row.length():
+	for j: int in size:
+		for i: int in size:
 			var tile: Vector2i = Vector2i(i, j)
-			var tile_name: String = legend[row[i]]
+			var tile_name: String = tile_name_at.call(i, j)
 			if _tiles_by_name.has(tile_name):
 				walkable_tiles.append(tile)
 				var list: Array[Vector2i] = _tiles_by_name[tile_name]
@@ -48,7 +48,7 @@ func is_walkable(tile: Vector2i) -> bool:
 	return _grid.is_in_boundsv(tile) and not _grid.is_point_solid(tile)
 
 
-## The walkable tiles called [param tile_name] in the legend (e.g. "cobble").
+## The walkable tiles called [param tile_name] (e.g. "cobble").
 func tiles_of(tile_name: String) -> Array[Vector2i]:
 	return _tiles_by_name[tile_name]
 

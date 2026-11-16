@@ -60,7 +60,7 @@ const TUNING_KEYS: Array[String] = [
 	"cat_timeout", "cat_walk_frames_per_tile", "bird_hop_rate", "bird_flap_rate", "bird_fly_velocity",
 	"lantern_walk_mult", "lantern_light_seconds", "lantern_round_timeout",
 ]
-const LAYOUT_KEYS: Array[String] = ["sprites", "doors", "placements"]
+const LAYOUT_KEYS: Array[String] = ["sprites"]
 const DOOR_HOME: String = "home"
 
 ## The village the events play out in.
@@ -155,7 +155,7 @@ func start_lantern_round() -> bool:
 
 ## Lights or puts out every lantern at once.
 func set_all_lanterns(lit: bool) -> void:
-	for lantern: VillageScene.Lantern in village.lanterns:
+	for lantern: Lantern in village.lanterns:
 		lantern.set_lit(lit)
 
 
@@ -266,11 +266,10 @@ func _setup() -> void:
 		get_tree().quit(1)
 		return
 	_sprites = layout["sprites"]
-	var doors: Array = layout["doors"]
-	for door: Dictionary in doors:
+	for door: Dictionary in village.doors:
 		if door["kind"] == DOOR_HOME:
 			home_doors.append(Vector2i(int(door["door"][0]), int(door["door"][1])))
-	_setup_lanterns(layout["placements"])
+	_setup_lanterns()
 	clock.dusk.connect(_on_dusk)
 	clock.dawn.connect(_on_dawn)
 	_timer = t("event_first")
@@ -284,16 +283,12 @@ func _setup() -> void:
 				push_warning("EventDirector: %s could not start now" % arg)
 
 
-## Lantern tile positions come from the layout's placements, in the same order the
-## village made [member VillageScene.lanterns].
-func _setup_lanterns(placements: Array) -> void:
+## Lantern tile positions come from the lantern nodes ([method VillageScene.tile_of]), in the
+## order of [member VillageScene.lanterns].
+func _setup_lanterns() -> void:
 	var positions: Array[Vector2] = []
-	for entry: Dictionary in placements:
-		if entry["sprite"] == VillageScene.LANTERN_SPRITE:
-			positions.append(Vector2(float(entry["i"]), float(entry["j"])))
-	if positions.size() != village.lanterns.size():
-		push_error("EventDirector: %d lantern placements but %d lanterns" % [positions.size(), village.lanterns.size()])
-		return
+	for lantern: Lantern in village.lanterns:
+		positions.append(village.tile_of(lantern))
 	for lantern_pos: Vector2 in positions:
 		var best: Vector2i = Vector2i.ZERO
 		var best_distance: float = INF

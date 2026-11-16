@@ -2,7 +2,7 @@ class_name LanternRound
 extends VillageEvent
 ## Evening lantern round (story 005): at dusk an elder walks to each unlit lantern in
 ## order (by i + j, back of the village first) and lights it with
-## [method VillageScene.Lantern.set_lit], pausing [code]lantern_light_seconds[/code] at
+## [method Lantern.set_lit], pausing [code]lantern_light_seconds[/code] at
 ## each, then goes home. The elder is the free visible elder nearest the first lantern,
 ## else an elder at home, who steps out of their door.
 ##
