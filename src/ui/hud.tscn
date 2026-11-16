@@ -1,15 +1,15 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://fswj5yts8wg8"]
 
-[ext_resource type="Script" path="res://src/ui/hud.gd" id="1_hud"]
-[ext_resource type="Theme" path="res://src/ui/hud_theme.tres" id="2_theme"]
-[ext_resource type="Script" path="res://src/ui/villager_label.gd" id="3_label"]
+[ext_resource type="Script" uid="uid://x31dd0p0xg2m" path="res://src/ui/hud.gd" id="1_hud"]
+[ext_resource type="Theme" uid="uid://cfwyxra33pjp0" path="res://src/ui/hud_theme.tres" id="2_theme"]
+[ext_resource type="Script" uid="uid://byg40valjgjdk" path="res://src/ui/villager_label.gd" id="3_label"]
 
-[node name="Hud" type="CanvasLayer"]
+[node name="Hud" type="CanvasLayer" unique_id=1611182826]
 process_mode = 3
 layer = 10
 script = ExtResource("1_hud")
 
-[node name="Root" type="Control" parent="."]
+[node name="Root" type="Control" parent="." unique_id=1979349364]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,44 +19,47 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("2_theme")
 
-[node name="Top" type="VBoxContainer" parent="Root"]
+[node name="Top" type="VBoxContainer" parent="Root" unique_id=1683250157]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 4.0
 mouse_filter = 2
 theme_override_constants/separation = 2
 
-[node name="StatusPanel" type="PanelContainer" parent="Root/Top"]
+[node name="StatusPanel" type="PanelContainer" parent="Root/Top" unique_id=793334508]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Row" type="HBoxContainer" parent="Root/Top/StatusPanel"]
+[node name="Row" type="HBoxContainer" parent="Root/Top/StatusPanel" unique_id=644317809]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 6
 
-[node name="Clock" type="Label" parent="Root/Top/StatusPanel/Row"]
+[node name="Clock" type="Label" parent="Root/Top/StatusPanel/Row" unique_id=87475165]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 28
 text = "Day 1  06:28  Dawn"
 
-[node name="Speed" type="Label" parent="Root/Top/StatusPanel/Row"]
+[node name="Speed" type="Label" parent="Root/Top/StatusPanel/Row" unique_id=1799263380]
 layout_mode = 2
 theme_type_variation = &"HudDim"
+theme_override_font_sizes/font_size = 28
 text = "x1"
 horizontal_alignment = 2
 
-[node name="TrainPanel" type="PanelContainer" parent="Root/Top"]
+[node name="TrainPanel" type="PanelContainer" parent="Root/Top" unique_id=1882479370]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Train" type="Label" parent="Root/Top/TrainPanel"]
+[node name="Train" type="Label" parent="Root/Top/TrainPanel" unique_id=627724729]
 layout_mode = 2
 theme_type_variation = &"HudSoft"
+theme_override_font_sizes/font_size = 28
 text = "Next train in 6s"
 
-[node name="Bottom" type="HBoxContainer" parent="Root"]
+[node name="Bottom" type="HBoxContainer" parent="Root" unique_id=330721036]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -71,7 +74,7 @@ grow_vertical = 0
 mouse_filter = 2
 theme_override_constants/separation = 4
 
-[node name="Log" type="VBoxContainer" parent="Root/Bottom"]
+[node name="Log" type="VBoxContainer" parent="Root/Bottom" unique_id=1334702786]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
@@ -79,30 +82,32 @@ mouse_filter = 2
 theme_override_constants/separation = 1
 alignment = 2
 
-[node name="Controls" type="PanelContainer" parent="Root/Bottom"]
+[node name="Controls" type="PanelContainer" parent="Root/Bottom" unique_id=408110714]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 mouse_filter = 2
 
-[node name="Lines" type="VBoxContainer" parent="Root/Bottom/Controls"]
+[node name="Lines" type="VBoxContainer" parent="Root/Bottom/Controls" unique_id=1766769093]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="Line1" type="Label" parent="Root/Bottom/Controls/Lines"]
+[node name="Line1" type="Label" parent="Root/Bottom/Controls/Lines" unique_id=893507708]
 layout_mode = 2
 theme_type_variation = &"HudSoft"
+theme_override_font_sizes/font_size = 28
 text = "Space pause · 1 2 3 speed · drag or arrows to look"
 horizontal_alignment = 1
 
-[node name="Line2" type="Label" parent="Root/Bottom/Controls/Lines"]
+[node name="Line2" type="Label" parent="Root/Bottom/Controls/Lines" unique_id=1538243839]
 layout_mode = 2
 theme_type_variation = &"HudSoft"
+theme_override_font_sizes/font_size = 28
 text = "click a villager · H hide · M mute · R new day"
 horizontal_alignment = 1
 
-[node name="PausePanel" type="CenterContainer" parent="."]
+[node name="PausePanel" type="CenterContainer" parent="." unique_id=1325792194]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -112,19 +117,19 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("2_theme")
 
-[node name="Panel" type="PanelContainer" parent="PausePanel"]
+[node name="Panel" type="PanelContainer" parent="PausePanel" unique_id=2134344092]
 custom_minimum_size = Vector2(120, 32)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"StrongPanel"
 
-[node name="Box" type="VBoxContainer" parent="PausePanel/Panel"]
+[node name="Box" type="VBoxContainer" parent="PausePanel/Panel" unique_id=133560369]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Title" type="Label" parent="PausePanel/Panel/Box"]
+[node name="Title" type="Label" parent="PausePanel/Panel/Box" unique_id=1945615542]
 layout_mode = 2
 theme_type_variation = &"BoldLabel"
 theme_override_colors/font_color = Color(1, 0.89, 0.604, 1)
@@ -132,19 +137,19 @@ theme_override_font_sizes/font_size = 12
 text = "Paused"
 horizontal_alignment = 1
 
-[node name="Hint" type="Label" parent="PausePanel/Panel/Box"]
+[node name="Hint" type="Label" parent="PausePanel/Panel/Box" unique_id=2003937477]
 layout_mode = 2
 theme_type_variation = &"HudSoft"
 text = "Space to carry on"
 horizontal_alignment = 1
 
-[node name="VillagerLabel" type="PanelContainer" parent="."]
+[node name="VillagerLabel" type="PanelContainer" parent="." unique_id=1719230905]
 visible = false
 mouse_filter = 2
 theme = ExtResource("2_theme")
 theme_type_variation = &"StrongPanel"
 script = ExtResource("3_label")
 
-[node name="Text" type="Label" parent="VillagerLabel"]
+[node name="Text" type="Label" parent="VillagerLabel" unique_id=1558305964]
 layout_mode = 2
 theme_type_variation = &"HudGold"

@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://ck4gtxepgn300" path="res://src/village/village_scene.gd" id="1_village"]
 [ext_resource type="Script" uid="uid://bnhqty8utb8xj" path="res://src/village/camera_rig.gd" id="2_camera"]
-[ext_resource type="TileSet" path="res://assets/tiles/village_tiles.tres" id="2_qivm7"]
-[ext_resource type="Script" path="res://src/village/building.gd" id="3_ni7lr"]
+[ext_resource type="TileSet" uid="uid://bfkx4thhogrvd" path="res://assets/tiles/village_tiles.tres" id="2_qivm7"]
+[ext_resource type="Script" uid="uid://bofbmieycpnq" path="res://src/village/building.gd" id="3_ni7lr"]
 [ext_resource type="PackedScene" path="res://src/train/train.tscn" id="3_train"]
-[ext_resource type="Script" path="res://src/village/placed_sprite.gd" id="4_bl4mg"]
+[ext_resource type="Script" uid="uid://dtktm6sf2jikj" path="res://src/village/placed_sprite.gd" id="4_bl4mg"]
 [ext_resource type="Script" uid="uid://b4cxrjbfdiyr0" path="res://src/village/day_clock.gd" id="4_clock"]
-[ext_resource type="Script" path="res://src/village/lantern.gd" id="5_bncxb"]
+[ext_resource type="Script" uid="uid://b0hyicisbrl6i" path="res://src/village/lantern.gd" id="5_bncxb"]
 [ext_resource type="Script" uid="uid://cw57eiapgoivd" path="res://src/villagers/villager_routines.gd" id="5_routines"]
 [ext_resource type="Script" uid="uid://dwaohvdb4tf76" path="res://src/villagers/kid_tag.gd" id="6_kids"]
 [ext_resource type="Script" uid="uid://roycio6bexsq" path="res://src/villagers/rooftop_dash.gd" id="7_dash"]
@@ -16,8 +16,8 @@
 [ext_resource type="Script" uid="uid://cnq72tbqabwxn" path="res://src/village/daylight.gd" id="10_daylight"]
 [ext_resource type="Script" uid="uid://jt02vqva5kgl" path="res://src/village/night_glow.gd" id="11_glow"]
 [ext_resource type="Script" uid="uid://mj8p7h812h6y" path="res://src/village/simulation_speed.gd" id="12_speed"]
-[ext_resource type="PackedScene" path="res://src/ui/hud.tscn" id="13_hud"]
-[ext_resource type="PackedScene" path="res://src/ui/title_screen.tscn" id="14_title"]
+[ext_resource type="PackedScene" uid="uid://fswj5yts8wg8" path="res://src/ui/hud.tscn" id="13_hud"]
+[ext_resource type="PackedScene" uid="uid://cm33oiey7p5y0" path="res://src/ui/title_screen.tscn" id="14_title"]
 
 [node name="VillageScene" type="Node2D" unique_id=1671304368]
 script = ExtResource("1_village")
@@ -2190,3 +2190,4 @@ routines = NodePath("../VillagerRoutines")
 kid_tag = NodePath("../KidTag")
 
 [node name="TitleScreen" parent="." unique_id=1796489171 instance=ExtResource("14_title")]
+visible = false

@@ -1,25 +1,24 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cm33oiey7p5y0"]
 
-[ext_resource type="Script" path="res://src/ui/title_screen.gd" id="1_title"]
-[ext_resource type="Theme" path="res://src/ui/hud_theme.tres" id="2_theme"]
+[ext_resource type="Script" uid="uid://by1vcewkew4o" path="res://src/ui/title_screen.gd" id="1_title"]
+[ext_resource type="Theme" uid="uid://cfwyxra33pjp0" path="res://src/ui/hud_theme.tres" id="2_theme"]
 
-[node name="TitleScreen" type="CanvasLayer"]
+[node name="TitleScreen" type="CanvasLayer" unique_id=74777262]
 process_mode = 3
 layer = 20
-visible = false
 script = ExtResource("1_title")
 
-[node name="Band" type="ColorRect" parent="."]
+[node name="Band" type="ColorRect" parent="." unique_id=2147131882]
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 70.0
-offset_bottom = 190.0
+offset_bottom = 326.0
 grow_horizontal = 2
 mouse_filter = 2
 theme = ExtResource("2_theme")
 color = Color(0.047, 0.055, 0.094, 0.72)
 
-[node name="Box" type="VBoxContainer" parent="Band"]
+[node name="Box" type="VBoxContainer" parent="Band" unique_id=2098196974]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,58 +29,62 @@ mouse_filter = 2
 theme_override_constants/separation = 1
 alignment = 1
 
-[node name="Name" type="Label" parent="Band/Box"]
+[node name="Name" type="Label" parent="Band/Box" unique_id=1962545227]
 layout_mode = 2
 theme_type_variation = &"BoldLabel"
 theme_override_colors/font_color = Color(1, 0.89, 0.604, 1)
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 30
 text = "Shinobi Station"
 horizontal_alignment = 1
 
-[node name="Tagline" type="Label" parent="Band/Box"]
+[node name="Tagline" type="Label" parent="Band/Box" unique_id=1992534732]
 layout_mode = 2
-theme_override_font_sizes/font_size = 9
+theme_override_font_sizes/font_size = 30
 text = "a ninja village you sit and watch"
 horizontal_alignment = 1
 
-[node name="GapTop" type="Control" parent="Band/Box"]
+[node name="GapTop" type="Control" parent="Band/Box" unique_id=1412737041]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Controls1" type="Label" parent="Band/Box"]
+[node name="Controls1" type="Label" parent="Band/Box" unique_id=1565791685]
 layout_mode = 2
 theme_type_variation = &"HudSoft"
+theme_override_font_sizes/font_size = 28
 text = "Nothing to do: just watch the village"
 horizontal_alignment = 1
 
-[node name="Controls2" type="Label" parent="Band/Box"]
+[node name="Controls2" type="Label" parent="Band/Box" unique_id=1110031378]
 layout_mode = 2
 theme_type_variation = &"HudSoft"
+theme_override_font_sizes/font_size = 28
 text = "Space: pause   1 / 2 / 3: speed   drag or arrows: look around"
 horizontal_alignment = 1
 
-[node name="Controls3" type="Label" parent="Band/Box"]
+[node name="Controls3" type="Label" parent="Band/Box" unique_id=193075095]
 layout_mode = 2
 theme_type_variation = &"HudSoft"
+theme_override_font_sizes/font_size = 28
 text = "Click a villager: who they are"
 horizontal_alignment = 1
 
-[node name="Controls4" type="Label" parent="Band/Box"]
+[node name="Controls4" type="Label" parent="Band/Box" unique_id=510741602]
 layout_mode = 2
 theme_type_variation = &"HudSoft"
+theme_override_font_sizes/font_size = 28
 text = "H: hide the HUD   R: new day   M: mute"
 horizontal_alignment = 1
 
-[node name="GapBottom" type="Control" parent="Band/Box"]
+[node name="GapBottom" type="Control" parent="Band/Box" unique_id=59901548]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Prompt" type="Label" parent="Band/Box"]
+[node name="Prompt" type="Label" parent="Band/Box" unique_id=894387037]
 layout_mode = 2
 theme_type_variation = &"BoldLabel"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 28
 text = "Enter, Space or click to watch"
 horizontal_alignment = 1
