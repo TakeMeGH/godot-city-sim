@@ -11,6 +11,9 @@ extends Node
 ## [br]- at the platform they wait, board on [signal Train.departing] (hidden, state
 ## [code]AWAY[/code]) and step off on [signal Train.arrived], stand a moment, then carry on.
 ##
+## [br]- a share ([code]errand_chance[/code]) of the ninjas' trips are run at [code]run_speed[/code];
+## a run errand (a walk) ends with a short "catching breath" linger.
+##
 ## All randomness comes from one [RandomNumberGenerator] seeded with [code]villager_seed[/code].
 ##
 ## Tuning keys in [code]assets/data/village_tuning.json[/code] (times in seconds,
@@ -21,6 +24,8 @@ extends Node
 ##                                    count; names and types, used in order and repeated
 ## night_watch                        how many ninjas keep the night watch
 ## walk_speed, walk_frames_per_tile   walking speed; walk cycle frame swaps per tile
+## errand_chance, run_speed           share of ninjas' trips run instead of walked; running speed
+## breath_min, breath_max             "catching breath" linger after a run errand
 ## idle_min, idle_max                 linger at an activity
 ## activity_weights                   per type: train, shop, platform, plaza, wander
 ## walk_tiles                         tile names villagers may walk on
@@ -40,6 +45,7 @@ extends Node
 const VILLAGER_SCENE: PackedScene = preload("res://src/villagers/villager.tscn")
 const TUNING_KEYS: Array[String] = [
 	"villager_seed", "residents", "villager_names", "villager_types", "night_watch", "walk_speed",
+	"errand_chance", "run_speed", "breath_min", "breath_max",
 	"walk_frames_per_tile", "idle_min", "idle_max", "activity_weights", "walk_tiles", "leave_stagger",
 	"dusk_stagger", "start_outside_chance", "start_idle_min", "start_idle_max", "watch_out_before",
 	"watch_home_after", "watch_idle_min", "watch_idle_max", "wait_min", "wait_max", "alight_wait",
@@ -69,8 +75,11 @@ var villagers: Array[Villager] = []
 ## Walkable tiles and shortest paths. Valid once the village is ready.
 var paths: VillagePaths
 
+## The village's one seeded random generator ([code]villager_seed[/code]). [KidTag] and
+## [RooftopDash] draw from it too, so a run with the same seed plays out the same.
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
 var _tuning: Dictionary = {}
-var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _shop_doors: Array[Vector2i] = []
 var _platform_tiles: Array[Vector2i] = []
 
@@ -125,11 +134,11 @@ func next_activity(villager: Villager) -> void:
 		return
 	if villager.night_watch:
 		villager.activity = "on night watch"
-		_go_to(villager, _pick(paths.tiles_of(TILE_STREET)), func() -> void:
+		_go_to(villager, _pick(paths.tiles_of(TILE_STREET)), _t("walk_speed"), func() -> void:
 			villager.linger("on night watch", _range("watch_idle_min", "watch_idle_max")))
 		return
 	var weights: Dictionary = _tuning["activity_weights"][villager.type]
-	var roll: float = _rng.randf()
+	var roll: float = rng.randf()
 	var total: float = 0.0
 	var choice: String = ACTIVITIES[-1]
 	for activity: String in ACTIVITIES:
@@ -137,33 +146,40 @@ func next_activity(villager: Villager) -> void:
 		if roll < total:
 			choice = activity
 			break
+	var run: bool = villager.type == TYPE_NINJA and rng.randf() < _t("errand_chance")
+	var move_speed: float = _t("run_speed") if run else _t("walk_speed")
 	match choice:
 		"train":
-			villager.activity = "off to train"
+			villager.activity = "running to training" if run else "off to train"
 			var poses: Array[int] = Villager.TRAINING_POSES if villager.has_combat_poses() else Villager.WALK_CYCLE
-			_go_to(villager, _pick(paths.tiles_of(TILE_SAND)), func() -> void:
+			_go_to(villager, _pick(paths.tiles_of(TILE_SAND)), move_speed, func() -> void:
 				villager.linger("training", _range("idle_min", "idle_max"), poses, _t("train_pose_seconds")))
 		"shop":
-			villager.activity = "going shopping"
-			_go_to(villager, _pick(_shop_doors), func() -> void:
+			villager.activity = "running to the shop" if run else "going shopping"
+			_go_to(villager, _pick(_shop_doors), move_speed, func() -> void:
 				villager.linger("shopping", _range("idle_min", "idle_max")))
 		"platform":
-			villager.activity = "going to the station"
+			villager.activity = "running to the station" if run else "going to the station"
 			var arrive_platform: Callable = func() -> void:
 				if _is_awake(villager):
 					villager.wait("waiting for the train", _range("wait_min", "wait_max"))
 				else:
 					next_activity(villager)
-			_go_to(villager, _pick(_platform_tiles), arrive_platform)
+			_go_to(villager, _pick(_platform_tiles), move_speed, arrive_platform)
 		"plaza":
-			villager.activity = "strolling to the square"
+			villager.activity = "running to the square" if run else "strolling to the square"
 			var label: String = "resting in the square" if villager.type == TYPE_ELDER else "chatting in the square"
-			_go_to(villager, _pick(paths.tiles_of(TILE_PLAZA)), func() -> void:
+			_go_to(villager, _pick(paths.tiles_of(TILE_PLAZA)), move_speed, func() -> void:
 				villager.linger(label, _range("idle_min", "idle_max")))
 		_:
-			villager.activity = "taking a walk"
-			_go_to(villager, _pick(paths.tiles_of(TILE_STREET)), func() -> void:
-				villager.linger("looking around", _range("idle_min", "idle_max")))
+			if run:
+				villager.activity = "running an errand"
+				_go_to(villager, _pick(paths.tiles_of(TILE_STREET)), move_speed, func() -> void:
+					villager.linger("catching breath", _range("breath_min", "breath_max")))
+			else:
+				villager.activity = "taking a walk"
+				_go_to(villager, _pick(paths.tiles_of(TILE_STREET)), move_speed, func() -> void:
+					villager.linger("looking around", _range("idle_min", "idle_max")))
 
 
 func _setup() -> void:
@@ -172,7 +188,7 @@ func _setup() -> void:
 	if layout.is_empty() or _tuning.is_empty():
 		get_tree().quit(1)
 		return
-	_rng.seed = int(_tuning["villager_seed"])
+	rng.seed = int(_tuning["villager_seed"])
 	paths = VillagePaths.new(layout["map"], layout["tile_legend"], _tuning["walk_tiles"])
 	var min_i: int = int(_tuning["train_platform_min_i"])
 	for tile: Vector2i in paths.tiles_of(TILE_PLATFORM):
@@ -202,7 +218,7 @@ func _spawn(sprites: Dictionary, home_doors: Array[Vector2i]) -> void:
 	for k: int in int(_tuning["residents"]):
 		var villager: Villager = VILLAGER_SCENE.instantiate() as Villager
 		var villager_type: String = types[k % types.size()]
-		var offset: Vector2 = Vector2(_rng.randf() - 0.5, _rng.randf() - 0.5) * jitter
+		var offset: Vector2 = Vector2(rng.randf() - 0.5, rng.randf() - 0.5) * jitter
 		villager.setup(village, sprites[villager_type], names[k % names.size()], villager_type,
 			home_doors[k % home_doors.size()], offset, _t("walk_frames_per_tile"))
 		villager.visible = false
@@ -212,16 +228,16 @@ func _spawn(sprites: Dictionary, home_doors: Array[Vector2i]) -> void:
 		if villager_type == TYPE_NINJA:
 			ninjas.append(villager)
 	for k: int in mini(int(_tuning["night_watch"]), ninjas.size()):
-		var watcher: Villager = ninjas.pop_at(_rng.randi_range(0, ninjas.size() - 1))
+		var watcher: Villager = ninjas.pop_at(rng.randi_range(0, ninjas.size() - 1))
 		watcher.night_watch = true
 	# A lively start: most villagers who are awake are already out.
 	for villager: Villager in villagers:
-		if _is_awake(villager) and _rng.randf() < _t("start_outside_chance"):
+		if _is_awake(villager) and rng.randf() < _t("start_outside_chance"):
 			villager.visible = true
 			villager.place(Vector2(_pick(paths.walkable_tiles)) + Vector2(0.5, 0.5) + villager.offset_in_tile)
 			villager.linger("looking around", _range("start_idle_min", "start_idle_max"))
 		else:
-			villager.timer = _rng.randf() * _t("leave_stagger")
+			villager.timer = rng.randf() * _t("leave_stagger")
 
 
 func _is_awake(villager: Villager) -> bool:
@@ -246,13 +262,14 @@ func _go_home(villager: Villager) -> void:
 	var into_door: Vector2 = door + Vector2(0.5, _t("door_inset"))
 	var go_indoors: Callable = func() -> void:
 		villager.disappear(Villager.State.HOME, "at home")
-		villager.timer = _rng.randf() * _t("leave_stagger")
-	_go_to(villager, villager.home_door, go_indoors, into_door)
+		villager.timer = rng.randf() * _t("leave_stagger")
+	_go_to(villager, villager.home_door, _t("walk_speed"), go_indoors, into_door)
 
 
-## Walks [param villager] by the shortest path to [param tile] (its own offset from the
-## tile centre), then optionally on to [param extra], then calls [param on_arrive].
-func _go_to(villager: Villager, tile: Vector2i, on_arrive: Callable, extra: Variant = null) -> void:
+## Walks [param villager] at [param move_speed] tiles per second by the shortest path to
+## [param tile] (its own offset from the tile centre), then optionally on to [param extra],
+## then calls [param on_arrive].
+func _go_to(villager: Villager, tile: Vector2i, move_speed: float, on_arrive: Callable, extra: Variant = null) -> void:
 	var from: Vector2i = Vector2i(villager.tile_pos.floor())
 	if not paths.is_walkable(from):
 		from = villager.home_door
@@ -261,20 +278,20 @@ func _go_to(villager: Villager, tile: Vector2i, on_arrive: Callable, extra: Vari
 		points.append(Vector2(step) + Vector2(0.5, 0.5) + villager.offset_in_tile)
 	if extra != null:
 		points.append(extra)
-	villager.follow(points, _t("walk_speed"), on_arrive)
+	villager.follow(points, move_speed, on_arrive)
 
 
 func _on_dawn() -> void:
 	for villager: Villager in villagers:
 		if villager.state == Villager.State.HOME:
-			villager.timer = _rng.randf() * _t("leave_stagger")
+			villager.timer = rng.randf() * _t("leave_stagger")
 
 
 func _on_dusk() -> void:
 	for villager: Villager in villagers:
 		if villager.lock == null and villager.state in [Villager.State.IDLE, Villager.State.WAIT] \
 				and not _is_awake(villager):
-			villager.timer = minf(villager.timer, _rng.randf() * _t("dusk_stagger"))
+			villager.timer = minf(villager.timer, rng.randf() * _t("dusk_stagger"))
 
 
 func _on_train_arrived(platform_tiles: Array[Vector2i]) -> void:
@@ -297,11 +314,11 @@ func _on_train_departing() -> void:
 
 
 func _pick(tiles: Array[Vector2i]) -> Vector2i:
-	return tiles[_rng.randi_range(0, tiles.size() - 1)]
+	return tiles[rng.randi_range(0, tiles.size() - 1)]
 
 
 func _range(min_key: String, max_key: String) -> float:
-	return _rng.randf_range(_t(min_key), maxf(_t(min_key), _t(max_key)))
+	return rng.randf_range(_t(min_key), maxf(_t(min_key), _t(max_key)))
 
 
 func _t(key: String) -> float:

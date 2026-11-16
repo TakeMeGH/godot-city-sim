@@ -47,7 +47,7 @@ None, by design *(you said)*. What builds over time is the day: morning commute,
 - [ ] Isometric village scene in Godot from the Aseprite sprites: ground, houses and towers with water tanks, training ground, station, giant trees, lanterns, track, all depth-sorted correctly
 - [x] Steam train loops through, stops at the station, wheels animate, smoke puffs, villagers board and step off
 - [x] Villagers walk routines between home, the training ground, the station, the shop and the square, with four-direction walk cycles, and train at the training ground with punch and kick poses
-- [ ] NPCs running around: kids playing tag, ninjas sprinting on errands and dashing across the rooftops
+- [x] NPCs running around: kids playing tag, ninjas sprinting on errands and dashing across the rooftops
 - [ ] Small events, each with a one-line log: sparring match with a crowd, messenger hawk, cat chasing a sparrow, the evening lantern round
 - [ ] Day and night cycle: lit windows and lantern glow at night, villagers go home *(guessed)*
 - [ ] Idle controls: pause, speed, click a villager for name and task *(guessed)*

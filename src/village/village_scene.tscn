@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" path="res://src/train/train.tscn" id="3_train"]
 [ext_resource type="Script" path="res://src/village/day_clock.gd" id="4_clock"]
 [ext_resource type="Script" path="res://src/villagers/villager_routines.gd" id="5_routines"]
+[ext_resource type="Script" path="res://src/villagers/kid_tag.gd" id="6_kids"]
+[ext_resource type="Script" path="res://src/villagers/rooftop_dash.gd" id="7_dash"]
 
 [node name="VillageScene" type="Node2D"]
 script = ExtResource("1_village")
@@ -28,3 +30,14 @@ script = ExtResource("5_routines")
 village = NodePath("..")
 clock = NodePath("../DayClock")
 train = NodePath("../Train")
+
+[node name="KidTag" type="Node" parent="." node_paths=PackedStringArray("village", "clock", "routines")]
+script = ExtResource("6_kids")
+village = NodePath("..")
+clock = NodePath("../DayClock")
+routines = NodePath("../VillagerRoutines")
+
+[node name="RooftopDash" type="Node" parent="." node_paths=PackedStringArray("village", "routines")]
+script = ExtResource("7_dash")
+village = NodePath("..")
+routines = NodePath("../VillagerRoutines")
