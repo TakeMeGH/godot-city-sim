@@ -51,6 +51,13 @@ None, by design *(you said)*. What builds over time is the day: morning commute,
 - [x] Small events, each with a one-line log: sparring match with a crowd, messenger hawk, cat chasing a sparrow, the evening lantern round
 - [x] Day and night cycle: lit windows and lantern glow at night, villagers go home *(guessed)*
 - [x] Idle controls: pause, speed, click a villager for name and task *(guessed)*
+- [ ] Bigger village (about 20x20) laid out in districts around a main street, ringed by a wall; camera range and villager paths rebuilt for it
+- [ ] Building variety: roof and wall colour variants, 2- and 3-storey versions, rooftop details (water tanks, laundry lines, signs), all drawn in Aseprite
+- [ ] Villager variety: hair, skin and outfit variants of the current bodies, plus new roles (shopkeepers, masked gate guards, a ramen cook, academy teachers)
+- [ ] Wall and main gate with our own village name, with guards on duty
+- [ ] Market street: a ramen stand with banners, a flower shop and a tea house, where villagers eat and browse
+- [ ] Academy with a yard and a swing tree; kids gather there by day
+- [ ] Edge places: a training ground with three posts and a memorial stone, a fenced forest, a river with an arched bridge, and a hospital
 
 ## Your systems
 - train in the village · in the slice
@@ -68,7 +75,7 @@ None, by design *(you said)*. What builds over time is the day: morning commute,
 - Naruto's names, characters, the leaf symbol, the carved faces on the cliff, the village gate and its named buildings; Moonlighter's and Chef RPG's own art, characters and UI: the look guides the art, the series' designs stay its owner's
 
 ## Out of scope
-- several districts and a region map: grow it
+- a region map beyond the one village: grow it
 - placing buildings or laying track yourself: add it as a feature
 - porting the prototype's JavaScript: the Godot build is written fresh in GDScript, and the browser prototype stays in `prototypes/shinobi-station/` as its reference *(guessed)*
 
@@ -80,6 +87,9 @@ None, by design *(you said)*. What builds over time is the day: morning commute,
 5. Small events and the log
 6. Day and night
 7. Idle controls and the HUD
+8. The bigger village map in districts, with the wall (map first: everything else is placed on it)
+9. Building variety, then villager variety
+10. The landmarks: main gate, market street, academy, then the edge places
 
 ---
 **Kill condition:** if the Godot scene can't match the browser prototype's look at whole-number scale after one pass *(guessed)*
