@@ -1,0 +1,136 @@
+# The one-shot's small check (check-run/1).
+# Written by one-shot-check.sh --record: the results are /prototype's reading of
+# evidence/self-check.tsv; never edited by hand.
+kind: check-run/1
+engine: web
+browser: "HeadlessChrome/157.0.0.0"
+time: "2026-11-16 15:36:37"
+checks:
+  - id: boots
+    result: pass
+    evidence:
+      - "evidence/self-check.tsv"
+  - id: shot
+    result: pass
+    evidence:
+      - "evidence/play.png"
+  - id: outlines
+    result: pass
+    evidence:
+      - "evidence/figures.png"
+  - id: brief-words
+    result: pass
+    evidence:
+      - "evidence/brief-words.tsv"
+  - id: emoji
+    result: pass
+    evidence:
+      - "evidence/self-check.tsv"
+  - id: nearest-game
+    result: pass
+    evidence:
+      - "evidence/nearest-game.txt"
+brief_checklist:
+  - id: L1
+    result: fail
+    why: broken
+    evidence: "evidence/play.png"
+    item: "Look: isometric pixel art drawn in Aseprite *(you said)*. A hidden ninja village in a forest valley in the spirit of Konoha *(you said)*: packed round-walled towers and boxy blocks with warm terracotta and red-orange roofs, rooftop water tanks, washing lines and cloth banners, a tall plain cliff behind, giant broad-canopy trees around. Ninjas drawn anime-style: spiky or long hair, plain metal-plated headbands, sandals, kunai pouch, each villager type with its own silhouette. Warm afternoon sun, cool blue shadows, lit windows and lantern glow at night. Signature detail: rooftop water tanks and washing lines catching the light. 1 px dark outline, top-left light, no anti-aliasing. Every figure drawn, no emoji, no plain circles"
+  - id: L2
+    result: pass
+    evidence: "evidence/play.png"
+    item: "References: Naruto's Konoha *(you said)*: the hidden-village-in-the-trees warmth, roof colours and shapes, anime ninja silhouettes"
+  - id: L3
+    result: pass
+    evidence: "evidence/play.png"
+    item: "View: 2D isometric *(you said)* · Camera: a fixed 2:1 isometric view of the whole village on one screen, native 480×270 scaled up by whole numbers *(guessed)*"
+  - id: F1
+    result: pass
+    evidence: "evidence/play.png"
+    item: "One-screen isometric village, every sprite from Aseprite: block houses and round towers with water tanks, a training ground, the station, giant trees, lanterns, track and ground"
+  - id: F2
+    result: pass
+    evidence: "index.html:627"
+    item: "Steam train loops through, stops at the station, wheels animate, smoke puffs, villagers board and step off"
+  - id: F3
+    result: pass
+    evidence: "index.html:231"
+    item: "Ninja villagers walk routines between home, the training ground, the station, the shop and the square, with walk cycles in four directions"
+  - id: F4
+    result: pass
+    evidence: "index.html:231"
+    item: "Training ground with ninjas training (animated punch and kick poses)"
+  - id: F5
+    result: pass
+    evidence: "index.html:492"
+    item: "A rooftop ninja who dashes across the roofs now and then"
+  - id: F6
+    result: pass
+    evidence: "index.html:568"
+    item: "NPCs running around: kids playing tag, ninjas sprinting on errands"
+  - id: F7
+    result: pass
+    evidence: "index.html:366"
+    item: "Small events, each with a one-line log: a sparring match draws a crowd, a messenger hawk lands at the station, a cat chases a bird down the street, the lantern-lighter walks the streets at dusk *(guessed: which events)*"
+  - id: F8
+    result: pass
+    evidence: "index.html:349"
+    item: "Day and night cycle: lanterns glow at dusk, villagers go home at night *(guessed)*"
+  - id: F9
+    result: pass
+    evidence: "index.html:820"
+    item: "Idle controls: pause, speed, click a villager for name and task *(guessed)*"
+  - id: S1
+    result: pass
+    evidence: "index.html:627"
+    item: "train in the village · in the slice"
+  - id: S2
+    result: pass
+    evidence: "index.html:231"
+    item: "village simulation (villagers' routines) · in the slice"
+  - id: S3
+    result: pass
+    evidence: "index.html:349"
+    item: "day and night · in the slice *(guessed)*"
+  - id: S4
+    result: pass
+    evidence: "index.html:568"
+    item: "npc running around · in the slice"
+  - id: S5
+    result: pass
+    evidence: "index.html:366"
+    item: "small events · in the slice"
+  - id: M1
+    result: pass
+    evidence: "config.js:12"
+    item: "It's early morning in the forest clearing."
+  - id: M2
+    result: pass
+    evidence: "index.html:539"
+    item: "Villagers step out of their doors into the streets, kids start a game of tag in the square, and ninjas head for the training ground."
+  - id: M3
+    result: pass
+    evidence: "index.html:657"
+    item: "The train whistles in from the left, slows, and stops at the station; passengers step off and others board."
+  - id: M4
+    result: pass
+    evidence: "evidence/play.png"
+    item: "A ninja dashes across the rooftops, and a small event starts: a sparring match draws a crowd."
+  - id: M5
+    result: pass
+    evidence: "config.js:34"
+    item: "Within the minute you've seen the whole loop of the village, and the train pulls out again."
+  - id: C1
+    result: pass
+    evidence: "index.html:782"
+    item: "None, by design *(you said)*."
+  - id: C2
+    result: pass
+    evidence: "index.html:349"
+    item: "What builds over time is the day: morning commute, midday training, dusk lanterns, night quiet, then morning again."
+measures:
+  - id: step-time
+    value: 3.300
+    unit: ms
+    by: browser
+    detail: "mean 0.140 ms, slowest 3.300 ms, 398 steps"

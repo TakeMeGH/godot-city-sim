@@ -1,0 +1,24 @@
+L1	broken	evidence/play.png	built: isometric pixel art from Aseprite, a Konoha-like clearing under a cliff, cream blocks and round towers, terracotta roofs, rooftop tanks and washing lines, giant trees, anime ninjas with plated headbands, lit windows and lantern glow; missing: cloth banners, kunai pouches on the ninjas, blue-shifted shadows
+L2	pass	evidence/play.png	warm hidden village in the trees, terracotta roofs, anime ninja silhouettes; nothing from the series itself
+L3	pass	evidence/play.png	fixed 2:1 isometric view of the whole village, 480x270 scaled by a whole number
+F1	pass	evidence/play.png	one screen; houses, towers, tanks, training ground, station, giant trees, lanterns, track and ground all from assets/src/*.aseprite
+F2	pass	index.html:627	train arrives, slows, stops at stop_i, dwells, leaves; wheel frames swap with distance; smoke puffs at index.html:650; board and step off at index.html:657 and 668
+F3	pass	index.html:231	routines pick training ground, shop, station, square or a walk; four-direction walk frames at index.html:285; walkers visible in evidence/play.png
+F4	pass	index.html:231	training activity holds punch pose frames 8/9; sparring alternates punch and kick at index.html:425; punch frame in evidence/figures.png
+F5	pass	index.html:492	a ninja hops roof to roof with afterimages every rooftop_gap seconds; log line in evidence/play.png
+F6	pass	index.html:568	kids play tag (chase, tag, swap it, freeze); ninjas sprint at run_speed on errands; tag log lines in evidence/play.png
+F7	pass	index.html:366	spar with crowd, messenger hawk with a runner, cat and sparrow, each logs lines; lantern round at index.html:609
+F8	pass	index.html:349	daylight curve, night tint and glow at index.html:730, lit-window frames at night, lanterns lit by the round, villagers go home at index.html:235
+F9	pass	index.html:820	Space pause, 1/2/3 speed, click picks the nearest villager and shows name and activity (index.html:823), H hides the HUD
+S1	pass	index.html:627	train schedule runs from the start
+S2	pass	index.html:231	villagers' routines run on the day clock
+S3	pass	index.html:349	day and night cycle with dawn and dusk
+S4	pass	index.html:568	kids and running ninjas
+S5	pass	index.html:366	events cycle every event_gap seconds in the day
+M1	pass	config.js:12	start_time 0.27 is early morning
+M2	pass	index.html:539	villagers leave their doors on a stagger; kids start in the square playing tag
+M3	pass	index.html:657	first train at train_first 6 s, slows into the station, passengers step off, waiting villagers board on departure
+M4	pass	evidence/play.png	log shows the rooftop dash and the sparring match result within the run
+M5	pass	config.js:34	train at 6 s, rooftop dash at 8 s, first event at 10 s: all inside the first minute; the train leaves after train_dwell
+C1	pass	index.html:782	no goal, score or fail state anywhere; the only screens are title, play and pause
+C2	pass	index.html:349	the day turns from morning to dusk lanterns to night and back

@@ -1,0 +1,296 @@
+# Where each file in assets/ came from, one entry per file.
+
+- path: assets/src/background.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/bird.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/car.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/cat.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/elder.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/hawk.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/house_cream.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/house_grey.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/house_hip.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/house_tall.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/kid.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/kunoichi.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/lantern.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/loco.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/ninja.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/post.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/shop.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/smoke.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/station.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/target.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/tower.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/tree_big.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/tree_small.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/src/water_tower.aseprite
+  origin: ai
+  tool: "Aseprite 1.3.18 via the Aseprite MCP: rows of pixels laid out by Claude, painted by Lua and draw_rows"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: false
+- path: assets/background.png
+  origin: ai
+  tool: "exported from assets/src/background.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/bird.png
+  origin: ai
+  tool: "exported from assets/src/bird.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/car.png
+  origin: ai
+  tool: "exported from assets/src/car.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/cat.png
+  origin: ai
+  tool: "exported from assets/src/cat.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/elder.png
+  origin: ai
+  tool: "exported from assets/src/elder.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/hawk.png
+  origin: ai
+  tool: "exported from assets/src/hawk.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/house_cream.png
+  origin: ai
+  tool: "exported from assets/src/house_cream.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/house_grey.png
+  origin: ai
+  tool: "exported from assets/src/house_grey.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/house_hip.png
+  origin: ai
+  tool: "exported from assets/src/house_hip.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/house_tall.png
+  origin: ai
+  tool: "exported from assets/src/house_tall.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/kid.png
+  origin: ai
+  tool: "exported from assets/src/kid.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/kunoichi.png
+  origin: ai
+  tool: "exported from assets/src/kunoichi.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/lantern.png
+  origin: ai
+  tool: "exported from assets/src/lantern.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/loco.png
+  origin: ai
+  tool: "exported from assets/src/loco.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/ninja.png
+  origin: ai
+  tool: "exported from assets/src/ninja.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/post.png
+  origin: ai
+  tool: "exported from assets/src/post.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/shop.png
+  origin: ai
+  tool: "exported from assets/src/shop.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/smoke.png
+  origin: ai
+  tool: "exported from assets/src/smoke.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/station.png
+  origin: ai
+  tool: "exported from assets/src/station.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/target.png
+  origin: ai
+  tool: "exported from assets/src/target.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/tower.png
+  origin: ai
+  tool: "exported from assets/src/tower.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/tree_big.png
+  origin: ai
+  tool: "exported from assets/src/tree_big.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/tree_small.png
+  origin: ai
+  tool: "exported from assets/src/tree_small.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/water_tower.png
+  origin: ai
+  tool: "exported from assets/src/water_tower.aseprite by Aseprite"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true
+- path: assets/sprites.js
+  origin: code
+  tool: "bundles assets/*.png as data URIs plus the village layout, written by Claude"
+  model: "claude-opus-5-5"
+  date: 2026-11-16
+  ships: true

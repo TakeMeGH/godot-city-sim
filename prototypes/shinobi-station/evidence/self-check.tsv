@@ -1,0 +1,50 @@
+time	2026-11-16 15:36:37
+keep	lines	0	pinned	0
+briefword	naruto	shown	evidence/figures.png
+briefword	konoha envi type	shown	evidence/play.png
+briefword	isometric	shown	evidence/play.png
+briefword	pixel art	shown	evidence/play.png
+checklist	L1	broken	evidence/play.png	Look: isometric pixel art drawn in Aseprite *(you said)*. A hidden ninja village in a forest valley in the spirit of Konoha *(you said)*: packed round-walled towers and boxy blocks with warm terracotta and red-orange roofs, rooftop water tanks, washing lines and cloth banners, a tall plain cliff behind, giant broad-canopy trees around. Ninjas drawn anime-style: spiky or long hair, plain metal-plated headbands, sandals, kunai pouch, each villager type with its own silhouette. Warm afternoon sun, cool blue shadows, lit windows and lantern glow at night. Signature detail: rooftop water tanks and washing lines catching the light. 1 px dark outline, top-left light, no anti-aliasing. Every figure drawn, no emoji, no plain circles	built: isometric pixel art from Aseprite, a Konoha-like clearing under a cliff, cream blocks and round towers, terracotta roofs, rooftop tanks and washing lines, giant trees, anime ninjas with plated headbands, lit windows and lantern glow; missing: cloth banners, kunai pouches on the ninjas, blue-shifted shadows
+checklist	L2	pass	evidence/play.png	References: Naruto's Konoha *(you said)*: the hidden-village-in-the-trees warmth, roof colours and shapes, anime ninja silhouettes	warm hidden village in the trees, terracotta roofs, anime ninja silhouettes; nothing from the series itself
+checklist	L3	pass	evidence/play.png	View: 2D isometric *(you said)* · Camera: a fixed 2:1 isometric view of the whole village on one screen, native 480×270 scaled up by whole numbers *(guessed)*	fixed 2:1 isometric view of the whole village, 480x270 scaled by a whole number
+checklist	F1	pass	evidence/play.png	One-screen isometric village, every sprite from Aseprite: block houses and round towers with water tanks, a training ground, the station, giant trees, lanterns, track and ground	one screen; houses, towers, tanks, training ground, station, giant trees, lanterns, track and ground all from assets/src/*.aseprite
+checklist	F2	pass	index.html:627	Steam train loops through, stops at the station, wheels animate, smoke puffs, villagers board and step off	train arrives, slows, stops at stop_i, dwells, leaves; wheel frames swap with distance; smoke puffs at index.html:650; board and step off at index.html:657 and 668
+checklist	F3	pass	index.html:231	Ninja villagers walk routines between home, the training ground, the station, the shop and the square, with walk cycles in four directions	routines pick training ground, shop, station, square or a walk; four-direction walk frames at index.html:285; walkers visible in evidence/play.png
+checklist	F4	pass	index.html:231	Training ground with ninjas training (animated punch and kick poses)	training activity holds punch pose frames 8/9; sparring alternates punch and kick at index.html:425; punch frame in evidence/figures.png
+checklist	F5	pass	index.html:492	A rooftop ninja who dashes across the roofs now and then	a ninja hops roof to roof with afterimages every rooftop_gap seconds; log line in evidence/play.png
+checklist	F6	pass	index.html:568	NPCs running around: kids playing tag, ninjas sprinting on errands	kids play tag (chase, tag, swap it, freeze); ninjas sprint at run_speed on errands; tag log lines in evidence/play.png
+checklist	F7	pass	index.html:366	Small events, each with a one-line log: a sparring match draws a crowd, a messenger hawk lands at the station, a cat chases a bird down the street, the lantern-lighter walks the streets at dusk *(guessed: which events)*	spar with crowd, messenger hawk with a runner, cat and sparrow, each logs lines; lantern round at index.html:609
+checklist	F8	pass	index.html:349	Day and night cycle: lanterns glow at dusk, villagers go home at night *(guessed)*	daylight curve, night tint and glow at index.html:730, lit-window frames at night, lanterns lit by the round, villagers go home at index.html:235
+checklist	F9	pass	index.html:820	Idle controls: pause, speed, click a villager for name and task *(guessed)*	Space pause, 1/2/3 speed, click picks the nearest villager and shows name and activity (index.html:823), H hides the HUD
+checklist	S1	pass	index.html:627	train in the village · in the slice	train schedule runs from the start
+checklist	S2	pass	index.html:231	village simulation (villagers' routines) · in the slice	villagers' routines run on the day clock
+checklist	S3	pass	index.html:349	day and night · in the slice *(guessed)*	day and night cycle with dawn and dusk
+checklist	S4	pass	index.html:568	npc running around · in the slice	kids and running ninjas
+checklist	S5	pass	index.html:366	small events · in the slice	events cycle every event_gap seconds in the day
+checklist	M1	pass	config.js:12	It's early morning in the forest clearing.	start_time 0.27 is early morning
+checklist	M2	pass	index.html:539	Villagers step out of their doors into the streets, kids start a game of tag in the square, and ninjas head for the training ground.	villagers leave their doors on a stagger; kids start in the square playing tag
+checklist	M3	pass	index.html:657	The train whistles in from the left, slows, and stops at the station; passengers step off and others board.	first train at train_first 6 s, slows into the station, passengers step off, waiting villagers board on departure
+checklist	M4	pass	evidence/play.png	A ninja dashes across the rooftops, and a small event starts: a sparring match draws a crowd.	log shows the rooftop dash and the sparring match result within the run
+checklist	M5	pass	config.js:34	Within the minute you've seen the whole loop of the village, and the train pulls out again.	train at 6 s, rooftop dash at 8 s, first event at 10 s: all inside the first minute; the train leaves after train_dwell
+checklist	C1	pass	index.html:782	None, by design *(you said)*.	no goal, score or fail state anywhere; the only screens are title, play and pause
+checklist	C2	pass	index.html:349	What builds over time is the day: morning commute, midday training, dusk lanterns, night quiet, then morning again.	the day turns from morning to dusk lanterns to night and back
+browser	HeadlessChrome/157.0.0.0
+scene	play	0	title
+scene	play	1	play
+digits	log	600 7px "Trebuchet MS", "Segoe UI", sans-serif	tabular	0
+digits	log	500 6px "Trebuchet MS", "Segoe UI", sans-serif	tabular	0
+digits	log	500 5.5px "Trebuchet MS", "Segoe UI", sans-serif	tabular	0
+measure	step-time	play	0.140	3.300	398
+lane	play	stop	6.6	309
+uncaught	play	0
+text	play	canvas	178,107,322,121	21.0	12.66	inside	Day 1  10:20  Morning
+text	play	canvas	396,107,414,117	21.0	7.97	inside	x8
+text	play	canvas	178,137,268,147	21.0	6.35	inside	Next train in 35s
+text	play	canvas	176,603,293,613	21.0	10.93	inside	10:07  little Tobi is it!
+text	play	canvas	174,577,398,591	21.0	10.92	inside	09:46  A ninja dashes across the rooftops
+text	play	canvas	174,551,302,561	21.0	10.93	inside	09:45  little Momo is it!
+text	play	canvas	174,525,472,539	21.0	10.92	inside	09:24  Yuki wins the sparring match. The crowd cheers
+text	play	canvas	812,603,1068,617	21.0	7.55	inside	Space pause · 1 2 3 speed · click a villager · H hide
+screen	play	drawn
+shot	play	prototypes/shinobi-station/evidence/play.png
+responds	changed	124
