@@ -16,10 +16,10 @@
 | 005 | Small events and the log | Integration | Complete | N/A |
 | 006 | Day and night | Visual/Feel | Complete | N/A |
 | 007 | Idle controls and HUD | UI | Complete | N/A |
-| 008 | Bigger village in districts, ringed by a wall | Integration | Ready | N/A |
-| 009 | Building variety | Visual/Feel | Ready | N/A |
-| 010 | Villager variety and new roles | Visual/Feel | Ready | N/A |
-| 011 | Wall and main gate | Integration | Ready | N/A |
-| 012 | Market street | Integration | Ready | N/A |
-| 013 | Academy with a swing tree | Integration | Ready | N/A |
-| 014 | Edge places | Integration | Ready | N/A |
+| 008 | Bigger village in districts, ringed by a wall | Integration | Complete | N/A |
+| 009 | Building variety | Visual/Feel | In Progress | N/A |
+| 010 | Villager variety and new roles | Visual/Feel | In Progress | N/A |
+| 011 | Wall and main gate | Integration | Complete | N/A |
+| 012 | Market street | Integration | Complete | N/A |
+| 013 | Academy with a swing tree | Integration | Complete | N/A |
+| 014 | Edge places | Integration | Complete | N/A |

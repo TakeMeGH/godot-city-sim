@@ -19,21 +19,36 @@ extends CanvasLayer
 ## Tuning keys in [code]assets/data/village_tuning.json[/code] (pixels, 0..255 colours):
 ## [codeblock]
 ## lantern_glow, headlamp_glow   {offset: [x, y], radius, alpha, color: [r, g, b]}
-## window_glows                  list of the same, one glow each per building
+## window_glows                  list of the same, one glow each per building storey
+## storey_px                     how far each storey above the first raises its window glows
 ## glow_min_night                no glow while night_amount is at or below this
 ## glow_strength_floor           see k above; (shared) night_strength
 ## glow_texture_size             gradient texture size (px), scaled to each radius
 ## [/codeblock]
 ## Lantern offsets are from the lantern's ground anchor, window offsets from the building's,
 ## and the headlamp offset from the loco's front on the track ([method Train.front_position]).
+##
+## Taller buildings (story 009): [code]window_glows[/code] are the first storey's windows. A
+## building with more storeys ([method VillageScene.building_storeys], from the sprite table)
+## gets the same set again for each storey above, raised [code]storey_px[/code] per storey,
+## matching the sheets, which grow upward by one storey height above a fixed ground anchor.
+## Rooftop details get no glow.
+##
+## Other glow sets (story 011): a building whose sprite-table entry has [code]glows[/code] gets
+## the tuning list named there instead of [code]window_glows[/code] (the gate: its two post
+## lanterns, [code]gate_glows[/code]), brightening with the night like the rest. Offsets are from
+## the building's ground anchor ([method VillageScene.ground_anchor], which undoes its sort_y).
 
 const TUNING_KEYS: Array[String] = [
 	"lantern_glow", "headlamp_glow", "window_glows", "glow_min_night", "glow_strength_floor",
-	"glow_texture_size", "night_strength",
+	"glow_texture_size", "night_strength", "storey_px",
 ]
 const CHANNEL_MAX: float = 255.0
 const GRADIENT_CENTRE: Vector2 = Vector2(0.5, 0.5)
 const GRADIENT_EDGE: Vector2 = Vector2(1.0, 0.5)
+## Sprite-table key naming a building's own glow list in the tuning (story 011).
+const GLOWS_KEY: String = "glows"
+const WINDOW_GLOWS_KEY: String = "window_glows"
 
 ## The village whose lanterns and buildings glow.
 @export var village: VillageScene
@@ -88,11 +103,20 @@ func _setup() -> void:
 	_lantern_alpha = float(lantern_spec["alpha"])
 	for lantern: VillageScene.Lantern in village.lanterns:
 		_lantern_glows.append(_add_glow(lantern_spec, lantern.position))
-	var window_specs: Array = _tuning["window_glows"]
+	var storey_px: float = _t("storey_px")
 	for building: Sprite2D in village.buildings:
-		for spec: Dictionary in window_specs:
-			_window_glows.append(_add_glow(spec, building.position))
-			_window_alphas.append(float(spec["alpha"]))
+		var sprite_name: String = village.building_sprite(building)
+		var glow_key: String = str(village.sprite_info(sprite_name).get(GLOWS_KEY, WINDOW_GLOWS_KEY))
+		if not _tuning.has(glow_key):
+			push_error("NightGlow: building '%s' names glows '%s', which the tuning lacks" % [sprite_name, glow_key])
+			continue
+		var specs: Array = _tuning[glow_key]
+		var anchor: Vector2 = village.ground_anchor(building)
+		for storey: int in village.building_storeys(building):
+			var storey_anchor: Vector2 = anchor + Vector2(0.0, -storey_px * storey)
+			for spec: Dictionary in specs:
+				_window_glows.append(_add_glow(spec, storey_anchor))
+				_window_alphas.append(float(spec["alpha"]))
 	var headlamp_spec: Dictionary = _tuning["headlamp_glow"]
 	_headlamp_alpha = float(headlamp_spec["alpha"])
 	_headlamp_offset = _vec(headlamp_spec["offset"])

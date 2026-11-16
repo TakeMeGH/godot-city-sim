@@ -1,0 +1,5 @@
+Reviewed-Content-Hash: src/villagers/villager_routines.gd bafdee4fbdc03594df147a819fb5a97b98b3b29b
+Reviewed-Content-Hash: src/village/village_scene.gd d5c2e4c45ac2164ae854167b84046e5fcf764cc7
+Reviewed-Content-Hash: src/village/ramen_steam.gd 15b3841844fcfbf1cbe7479104871cbcb1b686f3
+Reviewed-Content-Hash: assets/data/village_layout.json d2fa87db318d83030a40f6664cad8352c219d17c
+Reviewed-Content-Hash: assets/data/village_tuning.json e450ece3f7b71679f8ab3024a1ae7961773940aa

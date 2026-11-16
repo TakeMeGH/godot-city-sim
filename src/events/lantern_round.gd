@@ -8,7 +8,14 @@ extends VillageEvent
 ##
 ## Phases: WALK -> LIGHT -> WALK ... -> end. If the round takes longer than
 ## [code]lantern_round_timeout[/code] s the remaining lanterns light at once and the
-## elder is let go. At dawn ([method cut_short]) the elder is let go at once.
+## elder is let go. At dawn ([method cut_short]) the elder is let go at once. Every way
+## the round ends writes an end line to the log (all lit / timed out / cut by dawn).
+##
+## Timing (story 008, 20x20 map, 21 lanterns): the walk in lighting order is about
+## 201 tiles, so at [code]walk_speed * lantern_walk_mult[/code] tiles/s plus
+## [code]lantern_light_seconds[/code] per lantern the round must fit inside the night
+## ([code](1 - home_time + wake_time) * day_seconds[/code], 117.6 s); the timeout must be
+## shorter than the night too, or dawn cuts the round first ([EventDirector] checks it).
 ##
 ## Tuning keys (seconds, multiplier): lantern_walk_mult, lantern_light_seconds,
 ## lantern_round_timeout, (shared) walk_speed, door_inset.
@@ -65,6 +72,7 @@ func update(delta: float) -> void:
 		if _current >= 0:
 			_director.village.lanterns[_current].set_lit(true)
 		_queue.clear()
+		_director.log_line("The last lanterns are lit. Old %s heads home" % _elder.villager_name)
 		finish()
 		return
 	if _phase == Phase.LIGHT and phase_time >= _director.t("lantern_light_seconds"):
@@ -84,6 +92,15 @@ func _next() -> void:
 	_elder.activity = ACTIVITY
 	_director.walk_to(_elder, _director.lantern_spot(_current),
 		_director.t("walk_speed") * _director.t("lantern_walk_mult"), _on_reached.bind(_current))
+
+
+## Dawn: the elder leaves the round unfinished (the director puts every lantern out).
+func cut_short() -> void:
+	if done:
+		return
+	if _elder != null:
+		_director.log_line("Day breaks. Old %s leaves the lantern round and heads home" % _elder.villager_name)
+	super.cut_short()
 
 
 func _on_reached(index: int) -> void:

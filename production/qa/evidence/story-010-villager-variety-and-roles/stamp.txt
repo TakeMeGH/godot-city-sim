@@ -1,0 +1,7 @@
+Reviewed-Content-Hash: src/villagers/villager.gd d76fe36715b2ef423e6b99cdc0bc3d0417b8c2e4
+Reviewed-Content-Hash: src/villagers/villager_routines.gd d919bf16cdff6d97bde37e1d5fe25be8d4ce8ab4
+Reviewed-Content-Hash: src/villagers/kid_tag.gd 11ad35be52944333114164da51abdd9a44eb7cdb
+Reviewed-Content-Hash: src/villagers/rooftop_dash.gd d6d4eceb1d4068f2eed8ab5c54f3b3bd15031088
+Reviewed-Content-Hash: src/ui/villager_label.gd d68ba8bfa452e1e273d40c10be0b0735560a8fba
+Reviewed-Content-Hash: assets/data/village_layout.json 72dd1024ab1a60225a1d320be34f7cd0a8935eb1
+Reviewed-Content-Hash: assets/data/village_tuning.json 1801116bc7a416ac1c391d0a5653fad4994939c7

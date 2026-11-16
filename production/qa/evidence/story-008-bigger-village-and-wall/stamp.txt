@@ -1,0 +1,9 @@
+Reviewed-Content-Hash: assets/data/village_layout.json 97c2e7760dfeaf2f4e5ac8ccd1653940b5e4d826
+Reviewed-Content-Hash: assets/data/village_tuning.json 79a5bb094d25f98e50c2848a9211b1dfb12b4ea7
+Reviewed-Content-Hash: src/village/village_scene.gd 3e743bc6dabe3a45060c12b073b8f5808a72a9de
+Reviewed-Content-Hash: src/villagers/villager_routines.gd b4b087acb37542e4442d9f2fb48a410c4d1b16a4
+Reviewed-Content-Hash: src/villagers/rooftop_dash.gd 746b6da5912f5a24c6fe4c1b1c657f80e91e6649
+Reviewed-Content-Hash: src/village/camera_rig.gd 1e519c1a00698fff5659b46645733a60d6ede037
+Reviewed-Content-Hash: assets/art/wall_i.png 69a807792a7d167e99ac332a4ef67b5f96cb95b5
+Reviewed-Content-Hash: assets/art/wall_j.png 8ba57b07ae201f38f499d1231efe243be25b88d5
+Reviewed-Content-Hash: assets/art/wall_corner.png 4701ddf6f5d178877b364bfdaf7f9bacfe0535a5

@@ -3,7 +3,8 @@ extends PanelContainer
 ## The selected-villager label (story 007). A left click that is not a drag (the pointer
 ## moves less than [code]click_drag_px[/code] while held) selects the visible villager or
 ## kid nearest the click within [code]select_radius[/code], or clears the selection. The
-## label shows "Name: activity", follows them above their head, keeps clear of the HUD
+## label shows "Name: activity" (or "Name, role title: activity" for a role villager, story
+## 010), follows them above their head, keeps clear of the HUD
 ## panels and the Paused panel, and clears after [code]select_seconds[/code] real seconds
 ## (the timer stops while paused). Display only: it never changes a villager. The camera
 ## rig reads the same mouse events for dragging; neither consumes them.
@@ -121,7 +122,10 @@ func _process(delta: float) -> void:
 	if not is_instance_valid(selected) or not selected.visible:
 		visible = false
 		return
-	_text.text = tr("%s: %s") % [selected.villager_name, selected.activity]
+	if selected.role_title.is_empty():
+		_text.text = tr("%s: %s") % [selected.villager_name, selected.activity]
+	else:
+		_text.text = tr("%s, %s: %s") % [selected.villager_name, selected.role_title, selected.activity]
 	visible = true
 	var box: Vector2 = get_combined_minimum_size()
 	size = box

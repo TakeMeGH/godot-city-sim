@@ -1,13 +1,13 @@
 # Story 009: Building variety
 
 > **Epic**: Shinobi Station
-> **Status**: Ready
+> **Status**: In Progress
 > **Layer**: Feature
 > **Type**: Visual/Feel
 > **Estimate**: L
 > **Build step**: core
 > **Manifest Version**: N/A (minimal — no control manifest)
-> **Last Updated**: [set by /dev-story when implementation begins]
+> **Last Updated**: 2026-11-16
 
 ## Context
 
@@ -60,14 +60,16 @@
 
 ## Files
 
-- `assets/art/*.png` (new house, block, tower and shop variants), `assets/art/src/*.aseprite`
-- `assets/data/village_layout.json`
-- `assets/data/village_tuning.json`
-- `src/village/village_scene.gd`
-- `src/village/night_glow.gd`
-- `src/village/daylight.gd`
-
----
+- `assets/art/<type>_s<n>_<roof>_<wall>.png` — created (81 sheets: house_block and house_hip s1-s3, tower s1-s2, shop s1; roofs terra / red / slate, walls cream / ochre / white; 2 frames day / night)
+- `assets/art/roof_tank_round.png`, `roof_tank_square.png`, `roof_tank_barrel.png`, `roof_laundry.png`, `roof_sign.png` — created (rooftop details)
+- `assets/art/src/<type>_s<n>.aseprite`, `assets/art/src/roof_*.aseprite` — created (layered sources; colours are layer exports)
+- `assets/data/village_layout.json` — modified (86 sprite-table entries with storeys, roof height and detail points; building placements re-skinned in place with variants and `details`)
+- `assets/data/village_tuning.json` — modified (`storey_px`)
+- `src/village/village_scene.gd` — modified (sprite_info, is_building, building_sprite, building_storeys; rooftop details as child sprites; startup check for identical neighbours and bad detail points)
+- `src/village/night_glow.gd` — modified (window glows per storey)
+- `src/village/daylight.gd` — modified (doc comment)
+- `src/villagers/rooftop_dash.gd` — modified (roof height from the sprite table)
+- `tools/art/build_variants.lua`, `build_details.lua`, `variety.py`, `building_variants.json` — created (the generators, kept out of the scratchpad)
 
 ## QA Test Cases
 
@@ -88,3 +90,17 @@
 
 - Depends on: `production/epics/shinobi-station/story-008-bigger-village-and-wall.md`
 - Unlocks: `production/epics/shinobi-station/story-012-market-street.md`
+
+## Story-done check (2026-11-16)
+**Verdict**: BLOCKED — Visual/Feel sign-off in `production/qa/evidence/story-009-building-variety-evidence.md` is not ticked; it is yours
+**Criteria**: 9/9 pass in stills and runs; AC-6 (villagers hidden behind tall buildings) is seen in stills only
+**Deviations**: ADVISORY — the `red` roof's lightest step reads slightly salmon at the hip apex. ADVISORY — rooftop details do not raise the dash height, so a dashing ninja passes through tanks. ADVISORY — re-running story 008's `gen_village.py` would drop the variants; `variety.py` re-applies them
+**Reviewed by**: self, no independent review
+
+## Calls beyond the design
+- the block's and shop's built-in water tank became the `roof_tank_round` detail, put back on 25 of 30 blocks and shops · kept 2026-11-16
+- on blocks and shops "roof colour" recolours the parapet and trim; the flat roof stays grey concrete · kept 2026-11-16
+- the shop's original sand walls became the `ochre` ramp for every type · kept 2026-11-16
+- `building_sprites` kept; a sprite whose table `type` is in it counts as a building · kept 2026-11-16
+- each storey repeats the s1 window glows 14 px higher · kept 2026-11-16
+- variant choice is fixed data from a seeded script (`variety.py`, seed 9), no runtime randomness · kept 2026-11-16

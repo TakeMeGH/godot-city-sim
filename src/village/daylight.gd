@@ -8,6 +8,9 @@ extends Node
 ## [member warmth] (each tint is how much is taken off each 0..255 channel at full strength);
 ## [br]- once [member daylight] drops below [code]night_below_daylight[/code], shows every
 ## building's lit-window frame (frame 1) and the train's night frames ([member Train.night]).
+## "Every building" is [member VillageScene.buildings], which holds every story 009 variant
+## (any storeys, roof and wall); their rooftop details are single-frame child sprites and
+## keep their one frame, darkened by the tint like the rest of the world.
 ## [br]Matches the browser prototype's daylight(), warmth() and night tint
 ## ([code]prototypes/shinobi-station/index.html[/code]). The lamp glow is [NightGlow].
 ##

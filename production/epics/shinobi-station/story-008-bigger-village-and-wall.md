@@ -1,13 +1,13 @@
 # Story 008: Bigger village in districts, ringed by a wall
 
 > **Epic**: Shinobi Station
-> **Status**: Ready
+> **Status**: Complete
 > **Layer**: Feature
 > **Type**: Integration
 > **Estimate**: L
 > **Build step**: core
 > **Manifest Version**: N/A (minimal — no control manifest)
-> **Last Updated**: [set by /dev-story when implementation begins]
+> **Last Updated**: 2026-11-16
 
 ## Context
 
@@ -62,16 +62,13 @@
 
 ## Files
 
-- `assets/data/village_layout.json`
-- `assets/data/village_tuning.json`
-- `src/village/village_scene.gd`
-- `src/village/camera_rig.gd`
-- `src/villagers/village_paths.gd`
-- `src/villagers/villager_routines.gd`
-- `assets/art/wall.png`, `assets/art/src/wall.aseprite`
-- `tests/integration/village/bigger_village_test.gd`
-
----
+- `assets/data/village_layout.json` — regenerated (20x20 map: main street i=9 from the gate gap (9,0) to the cobble plaza (7-11, 7-11), cross streets j=2, 4, 6, 12, platform j=16, track j=17; 51 buildings, 53 doors, 20 lanterns, wall ring, ~118 trees outside; `lots` for gate, training, academy, hospital, market, forest, river)
+- `assets/data/village_tuning.json` — modified (camera range and drift, train stop and platform, 30 residents and 3 night watchers, kid homes and tag centre, rooftop rows, spar, hawk and cat tiles; check key lists)
+- `src/village/village_scene.gd` — modified (`lots` loaded; startup check that lots stay on the map, apart and off the streets)
+- `src/villagers/villager_routines.gd` — modified (startup checks: every door reachable from the plaza, every tuned tile key valid)
+- `src/villagers/rooftop_dash.gd` — modified (startup error when a rooftop row has no roof)
+- `src/village/camera_rig.gd` — modified (doc comment only)
+- `assets/art/wall_i.png`, `wall_j.png`, `wall_corner.png`, `assets/art/src/wall_*.aseprite` — created (wall segments and the corner post)
 
 ## QA Test Cases
 
@@ -92,3 +89,18 @@
 
 - Depends on: `production/epics/shinobi-station/story-001-isometric-village-scene.md`, `production/epics/shinobi-station/story-003-villager-routines.md`, `production/epics/shinobi-station/story-004-npcs-running-around.md`, `production/epics/shinobi-station/story-005-small-events-and-log.md`
 - Unlocks: `production/epics/shinobi-station/story-009-building-variety.md`, `production/epics/shinobi-station/story-011-wall-and-main-gate.md`
+
+## Completion Notes
+**Completed**: 2026-11-16
+**Criteria**: 9/10 passing, 1 deferred. Passing: AC-1 20x20 districts (01-centre), AC-2 wall ring with the gate gap and track gaps (02-05), AC-3 doors reachable (startup check, and the engine check re-ran it on the data: 53 of 53), AC-5 30 residents (01-centre), AC-6 tile keys re-pointed (a 150 s run here logged the spar, hawk, cat and lantern round through to their end lines), AC-7 camera range (02-05 after fix round 1), AC-8 depth sorting and 480x270 (stills), AC-9 editor preview (the @tool script reads the same layout), AC-10 values in data. Deferred: AC-4 walking by shortest path over the new streets (motion; the startup path check passes)
+**Deviations**: ADVISORY — 51 buildings against the story's 45-50. ADVISORY — every door faces south onto a street, so the blocks are single rows between streets rather than double-deep blocks. ADVISORY — the wall is 21 px tall, not 26, to fit its 64x48 canvas
+**Test Evidence**: waived at qa.level minimal; run observed in `production/qa/evidence/story-008-bigger-village-and-wall/` (centre and four corners)
+**Reviewed by**: self, no independent review; engine check by godot-gdscript-specialist: no problems found
+**Fix rounds**: 2 — (1) camera range 320x185 → 240x140 and drift 250x115 → 200x100: the corners showed mostly forest outside the wall; (2) found in the run-end full-day check: the lantern round (21 lanterns, a 201-tile walk) outlasted the night and ended at dawn without its log line — `lantern_walk_mult` 1.2 → 2.5 and `lantern_round_timeout` 90 → 110 (shorter than the 117.6 s night); the timeout and dawn endings now log a line; a startup check reports unreachable lantern approach tiles. The round now takes about 95-98 s and logs "Every lantern is lit"
+
+## Calls beyond the design
+- the gate gap tile (9,0) is dirt, so villagers can walk into it (`village_layout.json`) · kept 2026-11-16
+- about 20% of building slots hold street clutter or a small tree instead (`gen_village.py` in the agent's scratchpad) · kept 2026-11-16
+- the wall skips the two tiles where the track crosses it (0,17) and (19,17) · kept 2026-11-16
+- the cat row is j=6, open now; buildings later placed in the academy or hospital lots may hide parts of it · kept 2026-11-16
+- startup checks for lots, doors, tile keys and rooftop rows log errors and do not quit · kept 2026-11-16

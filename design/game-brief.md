@@ -51,13 +51,13 @@ None, by design *(you said)*. What builds over time is the day: morning commute,
 - [x] Small events, each with a one-line log: sparring match with a crowd, messenger hawk, cat chasing a sparrow, the evening lantern round
 - [x] Day and night cycle: lit windows and lantern glow at night, villagers go home *(guessed)*
 - [x] Idle controls: pause, speed, click a villager for name and task *(guessed)*
-- [ ] Bigger village (about 20x20) laid out in districts around a main street, ringed by a wall; camera range and villager paths rebuilt for it
+- [x] Bigger village (about 20x20) laid out in districts around a main street, ringed by a wall; camera range and villager paths rebuilt for it
 - [ ] Building variety: roof and wall colour variants, 2- and 3-storey versions, rooftop details (water tanks, laundry lines, signs), all drawn in Aseprite
 - [ ] Villager variety: hair, skin and outfit variants of the current bodies, plus new roles (shopkeepers, masked gate guards, a ramen cook, academy teachers)
-- [ ] Wall and main gate with our own village name, with guards on duty
-- [ ] Market street: a ramen stand with banners, a flower shop and a tea house, where villagers eat and browse
-- [ ] Academy with a yard and a swing tree; kids gather there by day
-- [ ] Edge places: a training ground with three posts and a memorial stone, a fenced forest, a river with an arched bridge, and a hospital
+- [x] Wall and main gate with our own village name, with guards on duty
+- [x] Market street: a ramen stand with banners, a flower shop and a tea house, where villagers eat and browse
+- [x] Academy with a yard and a swing tree; kids gather there by day
+- [x] Edge places: a training ground with three posts and a memorial stone, a fenced forest, a river with an arched bridge, and a hospital
 
 ## Your systems
 - train in the village · in the slice

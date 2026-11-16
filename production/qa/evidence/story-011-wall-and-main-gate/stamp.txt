@@ -1,0 +1,6 @@
+Reviewed-Content-Hash: src/villagers/villager_routines.gd ee8b1dd5b3fe83cabbbd79cacf5cd75b2053ef13
+Reviewed-Content-Hash: src/village/night_glow.gd 6bd9c7d6166a18b416b8276c786a6b3985892116
+Reviewed-Content-Hash: src/village/village_scene.gd 6424d0395e2b41b0506cac03c24bd5b2f679a501
+Reviewed-Content-Hash: assets/data/village_layout.json fbdd9ce0b116163056f8c8eeddb3201bacdd0f30
+Reviewed-Content-Hash: assets/data/village_tuning.json 25164959150e00f9840e1f24ddf101d9669a28dc
+Reviewed-Content-Hash: assets/art/gate.png d3aa2504cf0d8f9f40c35b6ec5c047c2f040bad2

@@ -1,13 +1,13 @@
 # Story 010: Villager variety and new roles
 
 > **Epic**: Shinobi Station
-> **Status**: Ready
+> **Status**: In Progress
 > **Layer**: Feature
 > **Type**: Visual/Feel
 > **Estimate**: L
 > **Build step**: core
 > **Manifest Version**: N/A (minimal — no control manifest)
-> **Last Updated**: [set by /dev-story when implementation begins]
+> **Last Updated**: 2026-11-16
 
 ## Context
 
@@ -59,15 +59,16 @@
 
 ## Files
 
-- `assets/art/*.png` (variant and role sheets), `assets/art/src/*.aseprite`
-- `assets/data/village_layout.json` (sprite table)
-- `assets/data/village_tuning.json` (looks, role counts)
-- `src/villagers/villager.gd`
-- `src/villagers/villager_routines.gd`
-- `src/villagers/kid_tag.gd`
-- `src/ui/villager_label.gd`
-
----
+- `assets/art/<body>_look1..8.png` — created (32 sheets for ninja, kunoichi, elder and kid; look1 is the original)
+- `assets/art/role_guard.png`, `role_teacher.png`, `role_shopkeeper.png`, `role_ramen_cook.png` — created
+- `assets/art/src/<body>_looks.aseprite`, `assets/art/src/role_*.aseprite` — created (layer group per look)
+- `assets/data/village_layout.json` — modified (36 sprite-table entries)
+- `assets/data/village_tuning.json` — modified (`looks`, `roles`, 8 more names)
+- `src/villagers/villager.gd` — modified (look, role, role_title; setup takes a sheet)
+- `src/villagers/villager_routines.gd` — modified (pick_look on the seeded generator, role villagers, sheet check, look count at startup)
+- `src/villagers/kid_tag.gd`, `src/villagers/rooftop_dash.gd` — modified (looks for kids and the runner)
+- `src/ui/villager_label.gd` — modified ("Name, role: activity")
+- `tools/art/villagers.lua`, `tools/art/villager_looks.json` — created (the generator and manifest)
 
 ## QA Test Cases
 
@@ -88,3 +89,15 @@
 
 - Depends on: `production/epics/shinobi-station/story-003-villager-routines.md`, `production/epics/shinobi-station/story-004-npcs-running-around.md`, `production/epics/shinobi-station/story-007-idle-controls-and-hud.md`
 - Unlocks: `production/epics/shinobi-station/story-011-wall-and-main-gate.md`, `production/epics/shinobi-station/story-012-market-street.md`, `production/epics/shinobi-station/story-013-academy-and-swing-tree.md`
+
+## Story-done check (2026-11-16)
+**Verdict**: BLOCKED — Visual/Feel sign-off in `production/qa/evidence/story-010-villager-variety-and-roles-evidence.md` is not ticked; it is yours
+**Criteria**: 8/8 pass in stills and runs
+**Deviations**: ADVISORY — role villagers can be picked by events (a guard sparred, a teacher took the hawk's message) until stories 011 to 013 station them. ADVISORY — artist's notes on the deep skin tone's eye contrast, the elder's dark hair from behind, the guard's spear grip and the teacher's coat hem in the kick frame
+**Reviewed by**: self, no independent review
+
+## Calls beyond the design
+- 8 role villagers are added on top of the 30 residents (2 guards, 2 teachers, 3 shopkeepers, 1 cook) · kept 2026-11-16
+- each body's 8 looks are all dealt before any repeats · kept 2026-11-16
+- role villagers never keep the night watch · kept 2026-11-16
+- villager type stays the base body, so poses, training and events key on it, not on the sheet · kept 2026-11-16

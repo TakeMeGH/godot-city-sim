@@ -1,0 +1,20 @@
+{
+  "training_post": {"w": 18, "h": 34, "frames": 1, "ax": 9, "ay": 31, "footprint": [1, 1],
+    "notes": "Thick wooden practice post, straw pad + rope binding, nicks. Anchor = ground under the post centre (tile centre). Layers: shadow, body."},
+  "memorial_stone": {"w": 26, "h": 36, "frames": 1, "ax": 13, "ay": 29, "footprint": [1, 1],
+    "notes": "Dark grey slab on a low pale plinth, abstract scratch lines (no text/symbols), flowers on the plinth front-left. Anchor = plinth footprint centre on the ground."},
+  "fence_i": {"w": 64, "h": 48, "frames": 1, "ax": 32, "ay": 32, "footprint": [1, 1],
+    "notes": "Weathered palisade along +i (upper-left to lower-right through the tile centre), lit face. Spans x 16..47, so consecutive tiles along i join seamlessly (checked as a strip offset +32,+16). No end outline on purpose (seams)."},
+  "fence_j": {"w": 64, "h": 48, "frames": 1, "ax": 32, "ay": 32, "footprint": [1, 1],
+    "notes": "Same palisade along +j (upper-right to lower-left), shaded face. Seamless at offset (-32,+16)."},
+  "fence_corner": {"w": 64, "h": 56, "frames": 1, "ax": 32, "ay": 40, "footprint": [1, 1],
+    "notes": "Rope-tied cluster of 5 stakes: one toward each of +i,-i,+j,-j plus a tall centre stake, so it closes the join for any corner orientation (one stake sticks out past the corner on the outside). Place alone on the corner tile."},
+  "warning_sign": {"w": 20, "h": 30, "frames": 1, "ax": 10, "ay": 28, "footprint": [1, 1],
+    "notes": "Wooden board on a post facing down-left (+j), big red exclamation mark, no words. Anchor = post foot."},
+  "bridge": {"w": 96, "h": 64, "frames": 1, "ax": 48, "ay": 40, "footprint": [2, 1],
+    "notes": "Red-lacquered arched footbridge. Runs along +i over 2 water tiles (river runs along +j). Footprint = tiles (i0,j0) and (i0+1,j0); anchor = point between them (tile (i0,j0) centre + (16,8) px). Deck ends meet the bank tiles (i0-1,j0) and (i0+2,j0). Layers bottom->top: shadow, deck, rail_back, rail_front (one sprite is enough; split layers only if the front rail must sort over walkers)."},
+  "hospital": {"w": 128, "h": 140, "frames": 2, "ax": 64, "ay": 106, "footprint": [2, 2],
+    "notes": "3-storey white plaster block, flat roof with parapet, wooden rooftop water tank, green floor bands, green-ringed white disc with a green horizontal bar (no cross). Frame 0 day, frame 1 night (most windows and the entrance lit). Horizontal strip 256x140. Entrance with green canopy on the +j (down-left) face in front of footprint tile (i0+1, j0+1): door tile = (i0+1, j0+2) relative to the footprint's min tile (i0, j0)."},
+  "tiles_new_frames": {"forest_dark": 9, "riverbank": 10,
+    "notes": "tiles.png is now 704x32 (11 frames of 64x32); frames 0-8 unchanged (0 differing pixels vs backup). riverbank = water with a grass bank + earth lip along the upper-left edge, i.e. land on the tile's -i side; there is no +i-side variant."}
+}

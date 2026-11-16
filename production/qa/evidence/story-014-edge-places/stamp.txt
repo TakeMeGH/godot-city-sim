@@ -1,0 +1,5 @@
+Reviewed-Content-Hash: src/village/village_scene.gd 25330210f40865e21137f48a610c1b8772ce567a
+Reviewed-Content-Hash: src/villagers/villager_routines.gd 5946338859abd98d9cfa7b9a5c977737c5a2c131
+Reviewed-Content-Hash: assets/data/village_layout.json b594d8fc62fd06df669a462ada7c98e740d3ae00
+Reviewed-Content-Hash: assets/data/village_tuning.json b9f5582a115099c76591ade2afcc886ed4f5164c
+Reviewed-Content-Hash: assets/art/tiles.png 8d0373676c1740e6973b3e8e361dbdc1bd768560

@@ -10,7 +10,13 @@ extends Node
 ## is skipped and the next in the rotation is tried after [code]event_retry[/code] s.
 ## At dusk the running event is cut short ([method VillageEvent.cut_short]) and the
 ## [LanternRound] starts; at dawn the round (if still going) is cut short and every
-## lantern goes out. Starting at night, every lantern is already lit.
+## lantern goes out. Starting at night, every lantern is already lit. There is one
+## round per evening: a run longer than a day ([code]day_seconds[/code]) logs a second
+## start at the next dusk, after "Day 2 begins".
+##
+## Startup checks (push_error, the game keeps running): every lantern's approach tile
+## ([method lantern_spot]) is reachable on the street paths from the one lit before it,
+## and [code]lantern_round_timeout[/code] is shorter than the night.
 ##
 ## Events: [SparEvent] ("spar"), [HawkEvent] ("hawk"), [CatEvent] ("cat"),
 ## [LanternRound] ("lanterns"). Each locks the villagers it uses and releases all of
@@ -43,7 +49,7 @@ const KIND_LANTERNS: String = "lanterns"
 const SKY_Z_INDEX: int = 100
 const TUNING_KEYS: Array[String] = [
 	"event_first", "event_gap", "event_retry", "event_window_after_wake", "event_window_before_home",
-	"event_rotation", "walk_speed", "run_speed", "door_inset",
+	"event_rotation", "walk_speed", "run_speed", "door_inset", "day_seconds",
 	"spar_seconds", "spar_gather_timeout", "spar_watchers", "spar_tile_a", "spar_spot_a", "spar_tile_b",
 	"spar_spot_b", "spar_watch_tiles", "spar_watch_speed_mult", "spar_beat", "spar_poses_a", "spar_poses_b",
 	"spar_lunge", "spar_lunge_rate", "spar_a_win_chance",
@@ -303,6 +309,22 @@ func _setup_lanterns(placements: Array) -> void:
 		var sum_a: float = positions[a].x + positions[a].y
 		var sum_b: float = positions[b].x + positions[b].y
 		return sum_a < sum_b or (sum_a == sum_b and positions[a].x < positions[b].x))
+	_check_lanterns(positions)
+
+
+## Reports (push_error, no quit) every lantern whose approach tile cannot be walked to
+## from the approach tile of the lantern lit before it, and a round timeout that the
+## night is too short for (dawn would cut the round before the timeout fires).
+func _check_lanterns(positions: Array[Vector2]) -> void:
+	for n: int in range(1, _lantern_order.size()):
+		var from: Vector2i = _lantern_spots[_lantern_order[n - 1]]
+		var index: int = _lantern_order[n]
+		var to: Vector2i = _lantern_spots[index]
+		if from != to and routines.paths.find_path(from, to).is_empty():
+			push_error("EventDirector: lantern %d at (%s, %s): its approach tile %s cannot be reached from %s" 				% [index, positions[index].x, positions[index].y, to, from])
+	var night: float = (1.0 - clock.home_time + clock.wake_time) * t("day_seconds")
+	if t("lantern_round_timeout") >= night:
+		push_error("EventDirector: lantern_round_timeout %s s is not shorter than the night (%s s)" 			% [t("lantern_round_timeout"), night])
 
 
 func _in_event_window() -> bool:

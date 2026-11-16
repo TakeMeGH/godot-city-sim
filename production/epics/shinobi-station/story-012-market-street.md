@@ -1,13 +1,13 @@
 # Story 012: Market street
 
 > **Epic**: Shinobi Station
-> **Status**: Ready
+> **Status**: Complete
 > **Layer**: Feature
 > **Type**: Integration
 > **Estimate**: M
 > **Build step**: core
 > **Manifest Version**: N/A (minimal — no control manifest)
-> **Last Updated**: [set by /dev-story when implementation begins]
+> **Last Updated**: 2026-11-16
 
 ## Context
 
@@ -59,14 +59,12 @@
 
 ## Files
 
-- `assets/art/ramen_stand.png`, `flower_shop.png`, `tea_house.png`, market props, `assets/art/src/*.aseprite`
-- `assets/data/village_layout.json`
-- `assets/data/village_tuning.json`
-- `src/villagers/villager_routines.gd`
-- `src/village/village_scene.gd`
-- `tests/integration/village/market_test.gd`
-
----
+- `assets/art/ramen_stand.png`, `ramen_steam.png`, `flower_shop.png`, `tea_house.png`, `prop_basket.png`, `prop_parasol.png`, `prop_buckets.png`, `prop_stool.png` and their `assets/art/src/*.aseprite` — created
+- `assets/data/village_layout.json` — modified (market lane on row 14, i 10-15, joined to the main street; flower shop (11.5,13.5), tea house (13.5,13.5), ramen stand (15.5,13.5); stall props; two lanterns; `ramen_seats`; buildings in `building_sprites`)
+- `assets/data/village_tuning.json` — modified (`market_stations`, eat-ramen and browse activities and weights, browse spots, `ramen_glows`, check lists)
+- `src/villagers/villager_routines.gd` — modified (cook and shopkeepers stationed by day; eat ramen at a free stool; browse; shop goes to the market doors)
+- `src/village/village_scene.gd` — modified (steam attached to the stand; steam check)
+- `src/village/ramen_steam.gd` — created (RamenSteam: frame swap by day, hidden when the stand closes)
 
 ## QA Test Cases
 
@@ -87,3 +85,17 @@
 
 - Depends on: `production/epics/shinobi-station/story-008-bigger-village-and-wall.md`, `production/epics/shinobi-station/story-009-building-variety.md`, `production/epics/shinobi-station/story-010-villager-variety-and-roles.md`
 - Unlocks: None
+
+## Completion Notes
+**Completed**: 2026-11-16
+**Criteria**: 7/8 passing, 1 deferred. Passing: AC-1 market lane with the ramen stand (banner, steam), flower shop and tea house (01), AC-2 props and night frames (01, 02), AC-3 cook and shopkeepers stationed by day (cook behind the counter in 01; the agent's probe showed all four at their places and home at dusk), AC-4 eat-ramen and browse activities (a customer at the counter and browsers in the lane in 01), AC-5 shop activity goes to the market doors, AC-6 the stand closed at night with its lantern lit (02), AC-8 values in data. Deferred: AC-7 how the activity texts read in the click label (not captured)
+**Deviations**: ADVISORY — customers stand at the stools; the villager sheets have no sitting frame. ADVISORY — the row-15 houses and the station stand in front of the market lane, so the default camera sees the lane only in part. ADVISORY — every run ends with a "2 ObjectDB instances leaked at exit" warning, also seen before this story (the train's whistle `AudioStreamWAV`, per story 009's run)
+**Test Evidence**: waived at qa.level minimal; run observed in `production/qa/evidence/story-012-market-street/`
+**Reviewed by**: self, no independent review
+
+## Calls beyond the design
+- the market is its own lane on row 14 with the shops facing it, rather than shops on street j=12 · kept 2026-11-16
+- ramen can be chosen only while the cook is on duty; a full or closed stand falls back to browsing, then wandering · kept 2026-11-16
+- the third shopkeeper minds the old shop at (12, 11) · kept 2026-11-16
+- the cook sorts behind the stand, so only his head shows over the counter · kept 2026-11-16
+- the lantern hidden behind the stand moved to the lane's east end · kept 2026-11-16

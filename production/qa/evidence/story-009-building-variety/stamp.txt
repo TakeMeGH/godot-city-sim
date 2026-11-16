@@ -1,0 +1,6 @@
+Reviewed-Content-Hash: src/village/village_scene.gd 85a5b81dbd5ed735b7b842e58dfcf9de790bd4bb
+Reviewed-Content-Hash: src/village/night_glow.gd d73553177eabd99b3631dd91be88f72bb7c28150
+Reviewed-Content-Hash: src/village/daylight.gd 2cd2c7338a9585e9e2133d9f08e1e15ce31e686f
+Reviewed-Content-Hash: src/villagers/rooftop_dash.gd c73d4c4114f8d32dc3c5e92f22b7edd091cb7cc0
+Reviewed-Content-Hash: assets/data/village_layout.json 24d0056e9b7e5242ed812e6ab8485c47a2ef8165
+Reviewed-Content-Hash: assets/data/village_tuning.json 52c69a617f8a4b5e5ce9a89fc4f9ed0689a85278

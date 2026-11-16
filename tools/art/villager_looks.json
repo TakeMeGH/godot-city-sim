@@ -1,0 +1,362 @@
+{
+ "ninja_look1": {
+  "body": "ninja",
+  "role": "",
+  "hair": "black_spiky",
+  "skin": "light",
+  "outfit": "navy",
+  "w": 24,
+  "h": 28,
+  "frames": 10
+ },
+ "ninja_look2": {
+  "body": "ninja",
+  "role": "",
+  "hair": "blond_spiky",
+  "skin": "medium",
+  "outfit": "green",
+  "w": 24,
+  "h": 28,
+  "frames": 10
+ },
+ "ninja_look3": {
+  "body": "ninja",
+  "role": "",
+  "hair": "brown_topknot",
+  "skin": "deep",
+  "outfit": "plum",
+  "w": 24,
+  "h": 28,
+  "frames": 10
+ },
+ "ninja_look4": {
+  "body": "ninja",
+  "role": "",
+  "hair": "black_topknot",
+  "skin": "medium",
+  "outfit": "navy",
+  "w": 24,
+  "h": 28,
+  "frames": 10
+ },
+ "ninja_look5": {
+  "body": "ninja",
+  "role": "",
+  "hair": "teal_spiky",
+  "skin": "light",
+  "outfit": "plum",
+  "w": 24,
+  "h": 28,
+  "frames": 10
+ },
+ "ninja_look6": {
+  "body": "ninja",
+  "role": "",
+  "hair": "silver_spiky",
+  "skin": "deep",
+  "outfit": "green",
+  "w": 24,
+  "h": 28,
+  "frames": 10
+ },
+ "ninja_look7": {
+  "body": "ninja",
+  "role": "",
+  "hair": "blond_topknot",
+  "skin": "light",
+  "outfit": "plum",
+  "w": 24,
+  "h": 28,
+  "frames": 10
+ },
+ "ninja_look8": {
+  "body": "ninja",
+  "role": "",
+  "hair": "brown_spiky",
+  "skin": "deep",
+  "outfit": "navy",
+  "w": 24,
+  "h": 28,
+  "frames": 10
+ },
+ "kunoichi_look1": {
+  "body": "kunoichi",
+  "role": "",
+  "hair": "plumblack_long",
+  "skin": "light",
+  "outfit": "plum",
+  "w": 24,
+  "h": 28,
+  "frames": 8
+ },
+ "kunoichi_look2": {
+  "body": "kunoichi",
+  "role": "",
+  "hair": "pink_buns",
+  "skin": "light",
+  "outfit": "teal",
+  "w": 24,
+  "h": 28,
+  "frames": 8
+ },
+ "kunoichi_look3": {
+  "body": "kunoichi",
+  "role": "",
+  "hair": "brown_long",
+  "skin": "deep",
+  "outfit": "green",
+  "w": 24,
+  "h": 28,
+  "frames": 8
+ },
+ "kunoichi_look4": {
+  "body": "kunoichi",
+  "role": "",
+  "hair": "teal_buns",
+  "skin": "medium",
+  "outfit": "red",
+  "w": 24,
+  "h": 28,
+  "frames": 8
+ },
+ "kunoichi_look5": {
+  "body": "kunoichi",
+  "role": "",
+  "hair": "plumblack_buns",
+  "skin": "medium",
+  "outfit": "green",
+  "w": 24,
+  "h": 28,
+  "frames": 8
+ },
+ "kunoichi_look6": {
+  "body": "kunoichi",
+  "role": "",
+  "hair": "brown_buns",
+  "skin": "light",
+  "outfit": "red",
+  "w": 24,
+  "h": 28,
+  "frames": 8
+ },
+ "kunoichi_look7": {
+  "body": "kunoichi",
+  "role": "",
+  "hair": "pink_long",
+  "skin": "deep",
+  "outfit": "teal",
+  "w": 24,
+  "h": 28,
+  "frames": 8
+ },
+ "kunoichi_look8": {
+  "body": "kunoichi",
+  "role": "",
+  "hair": "auburn_long",
+  "skin": "medium",
+  "outfit": "plum",
+  "w": 24,
+  "h": 28,
+  "frames": 8
+ },
+ "elder_look1": {
+  "body": "elder",
+  "role": "",
+  "hair": "grey_hat",
+  "skin": "light",
+  "outfit": "tan",
+  "w": 24,
+  "h": 28,
+  "frames": 8
+ },
+ "elder_look2": {
+  "body": "elder",
+  "role": "",
+  "hair": "white_bald",
+  "skin": "medium",
+  "outfit": "slate",
+  "w": 24,
+  "h": 28,
+  "frames": 8
+ },
+ "elder_look3": {
+  "body": "elder",
+  "role": "",
+  "hair": "darkgrey_hat",
+  "skin": "deep",
+  "outfit": "moss",
+  "w": 24,
+  "h": 28,
+  "frames": 8
+ },
+ "elder_look4": {
+  "body": "elder",
+  "role": "",
+  "hair": "white_hat",
+  "skin": "light",
+  "outfit": "plum",
+  "w": 24,
+  "h": 28,
+  "frames": 8
+ },
+ "elder_look5": {
+  "body": "elder",
+  "role": "",
+  "hair": "grey_bald",
+  "skin": "deep",
+  "outfit": "tan",
+  "w": 24,
+  "h": 28,
+  "frames": 8
+ },
+ "elder_look6": {
+  "body": "elder",
+  "role": "",
+  "hair": "sandy_bald",
+  "skin": "light",
+  "outfit": "moss",
+  "w": 24,
+  "h": 28,
+  "frames": 8
+ },
+ "elder_look7": {
+  "body": "elder",
+  "role": "",
+  "hair": "darkgrey_bald",
+  "skin": "medium",
+  "outfit": "plum",
+  "w": 24,
+  "h": 28,
+  "frames": 8
+ },
+ "elder_look8": {
+  "body": "elder",
+  "role": "",
+  "hair": "sandy_hat",
+  "skin": "medium",
+  "outfit": "slate",
+  "w": 24,
+  "h": 28,
+  "frames": 8
+ },
+ "kid_look1": {
+  "body": "kid",
+  "role": "",
+  "hair": "orange_spiky",
+  "skin": "light",
+  "outfit": "green",
+  "w": 18,
+  "h": 21,
+  "frames": 8
+ },
+ "kid_look2": {
+  "body": "kid",
+  "role": "",
+  "hair": "black_bowl",
+  "skin": "medium",
+  "outfit": "blue",
+  "w": 18,
+  "h": 21,
+  "frames": 8
+ },
+ "kid_look3": {
+  "body": "kid",
+  "role": "",
+  "hair": "blond_spiky",
+  "skin": "deep",
+  "outfit": "orange",
+  "w": 18,
+  "h": 21,
+  "frames": 8
+ },
+ "kid_look4": {
+  "body": "kid",
+  "role": "",
+  "hair": "pink_bowl",
+  "skin": "light",
+  "outfit": "yellow",
+  "w": 18,
+  "h": 21,
+  "frames": 8
+ },
+ "kid_look5": {
+  "body": "kid",
+  "role": "",
+  "hair": "black_spiky",
+  "skin": "deep",
+  "outfit": "green",
+  "w": 18,
+  "h": 21,
+  "frames": 8
+ },
+ "kid_look6": {
+  "body": "kid",
+  "role": "",
+  "hair": "orange_bowl",
+  "skin": "medium",
+  "outfit": "blue",
+  "w": 18,
+  "h": 21,
+  "frames": 8
+ },
+ "kid_look7": {
+  "body": "kid",
+  "role": "",
+  "hair": "teal_spiky",
+  "skin": "medium",
+  "outfit": "orange",
+  "w": 18,
+  "h": 21,
+  "frames": 8
+ },
+ "kid_look8": {
+  "body": "kid",
+  "role": "",
+  "hair": "blond_bowl",
+  "skin": "light",
+  "outfit": "green",
+  "w": 18,
+  "h": 21,
+  "frames": 8
+ },
+ "role_guard": {
+  "body": "ninja",
+  "role": "guard",
+  "hair": "black_spiky_masked",
+  "skin": "deep",
+  "outfit": "steel_armour",
+  "w": 24,
+  "h": 28,
+  "frames": 10
+ },
+ "role_teacher": {
+  "body": "ninja",
+  "role": "teacher",
+  "hair": "silver_spiky_glasses",
+  "skin": "medium",
+  "outfit": "olive_long_vest",
+  "w": 24,
+  "h": 28,
+  "frames": 10
+ },
+ "role_shopkeeper": {
+  "body": "kunoichi",
+  "role": "shopkeeper",
+  "hair": "brown_long_headscarf",
+  "skin": "light",
+  "outfit": "teal_apron",
+  "w": 24,
+  "h": 28,
+  "frames": 8
+ },
+ "role_ramen_cook": {
+  "body": "elder",
+  "role": "ramen_cook",
+  "hair": "darkgrey_bald_white_headband",
+  "skin": "medium",
+  "outfit": "white_cook",
+  "w": 24,
+  "h": 28,
+  "frames": 8
+ }
+}

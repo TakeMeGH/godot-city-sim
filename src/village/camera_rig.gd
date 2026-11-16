@@ -10,7 +10,7 @@ extends Camera2D
 ## Command-line user args (after the [code]--[/code] separator) fix the camera for
 ## repeatable screenshots:
 ## [codeblock]
-## godot --path . -- --cam=0,192      # world position, clamped to the range; no drift, no input
+## godot --path . -- --cam=0,320      # world position (the 20x20 village centre is 0,320), clamped to the range; no drift, no input
 ## godot --path . -- --freeze-camera  # stay at the start position
 ## [/codeblock]
 

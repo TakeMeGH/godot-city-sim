@@ -23,8 +23,18 @@ const ARRIVED_EPSILON: float = 0.0001
 
 ## Display name, e.g. "Haru".
 var villager_name: String = ""
-## Sprite type: "ninja", "kunoichi" or "elder".
+## Body (base) type that behaviour keys on: "ninja", "kunoichi", "elder" or "kid". A role
+## villager (story 010) has its role's base type here, so routines, poses and events treat
+## it like that body.
 var type: String = ""
+## Name of the sprite sheet this villager wears (a look such as "ninja_look3", or a role
+## sheet), from the layout's sprite table. Story 010; for display only, never for behaviour.
+var look: String = ""
+## Role key from the tuning [code]roles[/code] table (e.g. "ramen_cook"), or "" for an
+## ordinary resident (story 010).
+var role: String = ""
+## Role title shown by the click label (e.g. "ramen cook"), or "" for an ordinary resident.
+var role_title: String = ""
 ## The walkable tile in front of this villager's home door.
 var home_door: Vector2i = Vector2i.ZERO
 ## True for the villagers who are out at night and home by day.
@@ -65,10 +75,12 @@ var _pose_seconds: float = 1.0
 var _pose_timer: float = 0.0
 
 
-## Builds the sprite from the layout's [param sprite_info] (w, ax of the sheet named
-## [param villager_type]) and stores who this is. Call before [method VillageScene.add_entity].
+## Builds the sprite from the layout's [param sprite_info] (w, ax of sheet [param sheet], or
+## of the sheet named [param villager_type] when [param sheet] is empty) and stores who this
+## is. Every look and role sheet keeps its base body's frame layout and anchor (story 010).
+## Call before [method VillageScene.add_entity].
 func setup(village: VillageScene, sprite_info: Dictionary, display_name: String, villager_type: String,
-		door: Vector2i, offset: Vector2, walk_frames_per_tile: float) -> void:
+		door: Vector2i, offset: Vector2, walk_frames_per_tile: float, sheet: String = "") -> void:
 	_village = village
 	villager_name = display_name
 	name = display_name
@@ -78,11 +90,13 @@ func setup(village: VillageScene, sprite_info: Dictionary, display_name: String,
 	_walk_frames_per_tile = walk_frames_per_tile
 	_anchor_x = float(sprite_info["ax"])
 	_width = float(sprite_info["w"])
-	_sprite = village.create_sprite(villager_type, STAND_FRAME)
+	look = sheet if not sheet.is_empty() else villager_type
+	_sprite = village.create_sprite(look, STAND_FRAME)
 	add_child(_sprite)
 
 
-## True when the sprite sheet has the punch and kick frames.
+## True when the sprite sheet has the punch and kick frames (the ninja layout), whatever
+## look or role sheet it is.
 func has_combat_poses() -> bool:
 	return _sprite.hframes > KICK_FRAME
 

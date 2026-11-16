@@ -1,0 +1,23 @@
+{
+  "gate": {"w": 96, "h": 112, "frames": 2, "ax": 44, "ay": 96, "footprint": [1, 1],
+    "notes": "Frame 0 day, 1 night (lanterns lit). Anchor = gap tile centre. Built for a wall along +i using wall_i (64x48, anchor 32,32) at the neighbouring tiles (-1,0) and (+1,0). Left post covers the end of the left wall piece; the right post's right face ends where the right wall begins (2 px overlap), so the right wall can draw after the gate. Walkable passage between the posts is about 18 px wide on screen (i = -5..+4 units of the tile, 16 units per tile). The right door is swung inward and shows above the right wall's coping; the left door is folded behind the left wall and is clipped to the part visible above the coping. Name board reads KAZEMORI (3x5 pixel capitals, dark on cream), baked into both frames; a different village name would need the sheet redrawn. Lanterns at about (22,73) and (48,86), for the night glow."},
+  "ramen_stand": {"w": 64, "h": 80, "frames": 2, "ax": 32, "ay": 64, "footprint": [1, 1],
+    "steam_point": [4, -16],
+    "seat_points": [[-22, 1], [-16, 4], [-10, 7]],
+    "notes": "Frame 0 day (open: noren down, stove fire lit, broth in the pot, bowls on the counter); frame 1 night (closed: noren rolled up, fire out, paper lantern lit). The counter faces +j (down-left), so customers on the stools sit with their backs to the viewer. seat_points = the ground point (a villager's feet) under each stool; the stool top is 6 px above. steam_point = bottom centre for ramen_steam, just above the pot rim. Red banner with a bowl pictogram on a pole at the left front. Canvas is 64x80 rather than 64x72, because the roof would not fit above a tile-centre anchor at 72."},
+  "ramen_steam": {"w": 10, "h": 14, "frames": 2, "ax": 5, "ay": 14, "footprint": [0, 0],
+    "notes": "2 frames at 250 ms. Opaque pale wisps (#FBF0D8 / #C8C0B2), no alpha. Hide at night."},
+  "flower_shop": {"w": 64, "h": 80, "frames": 2, "ax": 32, "ay": 64, "footprint": [1, 1],
+    "notes": "Same box size as shop_s1. Shop opening plus a green-and-white awning on the +j (down-left) face; a wooden sign with a flower pictogram above the awning. Flower buckets out front on the left, potted flowers along the +i side. Night: shop interior and side windows lit."},
+  "tea_house": {"w": 64, "h": 94, "frames": 2, "ax": 32, "ay": 78, "footprint": [1, 1],
+    "notes": "Two storeys: dark timber ground floor with shoji doors and an indigo noren on the +j face, plaster upper floor, slate pent roof and gable roof. Paper lantern left of the door; a red-cloth bench on the +i side at about (42,88). Night: shoji, side lattice and three of the four upper windows lit, lantern lit."},
+  "prop_basket": {"w": 16, "h": 13, "frames": 1, "ax": 8, "ay": 12, "footprint": [0, 0], "notes": "Woven basket of leeks, radish, carrots and tomatoes, with a contact shadow."},
+  "prop_parasol": {"w": 22, "h": 34, "frames": 1, "ax": 11, "ay": 33, "footprint": [0, 0], "notes": "Red paper parasol on a pole and stand."},
+  "prop_buckets": {"w": 19, "h": 13, "frames": 1, "ax": 9, "ay": 12, "footprint": [0, 0], "notes": "Three metal buckets of mixed flowers."},
+  "prop_stool": {"w": 8, "h": 9, "frames": 1, "ax": 4, "ay": 8, "footprint": [0, 0], "notes": "Small wooden stool, the same as the ramen stand's stools."},
+  "academy": {"w": 128, "h": 140, "frames": 2, "ax": 64, "ay": 106, "footprint": [2, 2],
+    "notes": "Anchor = centre of the 2x2 footprint on the ground (shadow diamond = the full 2x2). Walls are inset 3 units of the 32 on each side. Three storeys of cream plaster with timber bands and a red gable roof (ridge along i). The entrance, a porch with steps and two posts, is on the +j (down-left) face at i = 0; the steps reach about 3 units past the footprint edge into the yard. A plain gold spiral emblem sits in the right (+i) gable. Night: about half of the windows and the door transom lit."},
+  "swing_tree": {"w": 76, "h": 92, "frames": 3, "ax": 38, "ay": 86, "footprint": [1, 1],
+    "seat_points": [[-17, -5], [-26, -8], [-8, -8]],
+    "notes": "tree_big's trunk, canopy and shadow layers copied as is, plus a low branch to the viewer's left and a rope swing. Frame 0 = at rest, 1 = back (left), 2 = forward (right); only the ropes and seat (layer 'swing') change. seat_points = top centre of the seat plank relative to the anchor, where the kid's seat goes (the plank is 9 px wide and 2 px thick)."}
+}
