@@ -1,0 +1,7 @@
+Reviewed-Content-Hash: src/village/day_clock.gd ffb0c2587baf4503a29d7807f827a793ce4885c5
+Reviewed-Content-Hash: src/villagers/village_paths.gd 5fb02218a753b9e50518c6a63c09c0063482cb7c
+Reviewed-Content-Hash: src/villagers/villager.gd 66c89d70135c793ed7ff9f01f5041de683568ae4
+Reviewed-Content-Hash: src/villagers/villager.tscn 63ff6513ccecb234524c9ab31f98519090fe4069
+Reviewed-Content-Hash: src/villagers/villager_routines.gd a2f1b9750ae6bac2c5c3ec2d8c66e05e05b70f0c
+Reviewed-Content-Hash: src/village/village_scene.tscn 203dc2efe38bca4e5f24c49ada5a5f1fa76a1fcc
+Reviewed-Content-Hash: assets/data/village_tuning.json c59a6b5448beb6780ace8190c0642274ceaec669

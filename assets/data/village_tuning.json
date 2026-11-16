@@ -46,5 +46,40 @@
 	"whistle_tones": [
 		{"freq": 660, "seconds": 0.5, "gain": 0.18, "slide": 20, "delay": 0},
 		{"freq": 830, "seconds": 0.7, "gain": 0.12, "slide": -30, "delay": 0.08}
-	]
+	],
+	"day_seconds": 240,
+	"start_time": 0.27,
+	"wake_time": 0.25,
+	"home_time": 0.76,
+	"villager_seed": 1,
+	"residents": 18,
+	"villager_names": ["Haru", "Ren", "Kaito", "Mio", "Sora", "Aki", "Yuki", "Daichi", "Hina", "Taro", "Emi", "Kenji", "Nao", "Rin", "Shin", "Asa", "Kou", "Mei", "Jun", "Saki", "Toma", "Ume", "Riku", "Nami", "Goro", "Fumi", "Iku", "Hoshi", "Tetsu", "Kiyo"],
+	"villager_types": ["ninja", "kunoichi", "elder", "elder", "kunoichi", "ninja", "ninja", "kunoichi", "ninja", "elder", "kunoichi", "ninja", "ninja", "kunoichi", "ninja", "ninja", "elder", "ninja"],
+	"night_watch": 2,
+	"walk_speed": 1.1,
+	"walk_frames_per_tile": 6,
+	"idle_min": 3,
+	"idle_max": 10,
+	"activity_weights": {
+		"ninja": {"train": 0.32, "shop": 0.12, "platform": 0.16, "plaza": 0.12, "wander": 0.28},
+		"kunoichi": {"train": 0.18, "shop": 0.32, "platform": 0.18, "plaza": 0.12, "wander": 0.2},
+		"elder": {"train": 0, "shop": 0.3, "platform": 0.1, "plaza": 0.25, "wander": 0.35}
+	},
+	"walk_tiles": ["dirt", "cobble", "platform", "sand"],
+	"leave_stagger": 25,
+	"dusk_stagger": 8,
+	"start_outside_chance": 0.7,
+	"start_idle_min": 0.5,
+	"start_idle_max": 6,
+	"watch_out_before": 0.02,
+	"watch_home_after": 0.04,
+	"watch_idle_min": 1,
+	"watch_idle_max": 4,
+	"wait_min": 40,
+	"wait_max": 70,
+	"alight_wait": 0.5,
+	"alight_stagger": 0.4,
+	"path_jitter": 0.34,
+	"door_inset": 0.07,
+	"train_pose_seconds": 0.45
 }

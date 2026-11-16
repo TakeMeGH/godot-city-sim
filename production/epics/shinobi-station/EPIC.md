@@ -11,7 +11,7 @@
 |---|-------|------|--------|-----|
 | 001 | Isometric village scene | Visual/Feel | In Progress | N/A |
 | 002 | Steam train and station | Integration | Complete | N/A |
-| 003 | Villager routines | Logic | Ready | N/A |
+| 003 | Villager routines | Logic | Complete | N/A |
 | 004 | NPCs running around | Logic | Ready | N/A |
 | 005 | Small events and the log | Integration | Ready | N/A |
 | 006 | Day and night | Visual/Feel | Ready | N/A |

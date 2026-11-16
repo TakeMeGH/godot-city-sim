@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/villagers/villager.gd" id="1_villager"]
+
+[node name="Villager" type="Node2D"]
+script = ExtResource("1_villager")
