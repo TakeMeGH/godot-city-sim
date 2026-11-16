@@ -1,15 +1,8 @@
-[gd_resource type="Theme" format=3]
-
-[sub_resource type="SystemFont" id="SystemFont_main"]
-font_names = PackedStringArray("Trebuchet MS", "Segoe UI", "Sans-Serif")
-antialiasing = 1
-hinting = 2
-subpixel_positioning = 0
+[gd_resource type="Theme" format=3 uid="uid://cfwyxra33pjp0"]
 
 [sub_resource type="SystemFont" id="SystemFont_bold"]
 font_names = PackedStringArray("Trebuchet MS", "Segoe UI", "Sans-Serif")
 font_weight = 700
-antialiasing = 1
 hinting = 2
 subpixel_positioning = 0
 
@@ -36,6 +29,11 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 anti_aliasing = false
+
+[sub_resource type="SystemFont" id="SystemFont_main"]
+font_names = PackedStringArray("Trebuchet MS", "Segoe UI", "Sans-Serif")
+hinting = 2
+subpixel_positioning = 0
 
 [resource]
 default_font = SubResource("SystemFont_main")

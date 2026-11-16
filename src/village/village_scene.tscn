@@ -1,92 +1,91 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dpsio7f4xrtyk"]
 
-[ext_resource type="Script" path="res://src/village/village_scene.gd" id="1_village"]
-[ext_resource type="Script" path="res://src/village/camera_rig.gd" id="2_camera"]
+[ext_resource type="Script" uid="uid://ck4gtxepgn300" path="res://src/village/village_scene.gd" id="1_village"]
+[ext_resource type="Script" uid="uid://bnhqty8utb8xj" path="res://src/village/camera_rig.gd" id="2_camera"]
 [ext_resource type="PackedScene" path="res://src/train/train.tscn" id="3_train"]
-[ext_resource type="Script" path="res://src/village/day_clock.gd" id="4_clock"]
-[ext_resource type="Script" path="res://src/villagers/villager_routines.gd" id="5_routines"]
-[ext_resource type="Script" path="res://src/villagers/kid_tag.gd" id="6_kids"]
-[ext_resource type="Script" path="res://src/villagers/rooftop_dash.gd" id="7_dash"]
-[ext_resource type="Script" path="res://src/village/village_log.gd" id="8_log"]
-[ext_resource type="Script" path="res://src/events/event_director.gd" id="9_events"]
-[ext_resource type="Script" path="res://src/village/daylight.gd" id="10_daylight"]
-[ext_resource type="Script" path="res://src/village/night_glow.gd" id="11_glow"]
-[ext_resource type="Script" path="res://src/village/simulation_speed.gd" id="12_speed"]
+[ext_resource type="Script" uid="uid://b4cxrjbfdiyr0" path="res://src/village/day_clock.gd" id="4_clock"]
+[ext_resource type="Script" uid="uid://cw57eiapgoivd" path="res://src/villagers/villager_routines.gd" id="5_routines"]
+[ext_resource type="Script" uid="uid://dwaohvdb4tf76" path="res://src/villagers/kid_tag.gd" id="6_kids"]
+[ext_resource type="Script" uid="uid://roycio6bexsq" path="res://src/villagers/rooftop_dash.gd" id="7_dash"]
+[ext_resource type="Script" uid="uid://c40l0mym85hxu" path="res://src/village/village_log.gd" id="8_log"]
+[ext_resource type="Script" uid="uid://c4qups4cswieu" path="res://src/events/event_director.gd" id="9_events"]
+[ext_resource type="Script" uid="uid://cnq72tbqabwxn" path="res://src/village/daylight.gd" id="10_daylight"]
+[ext_resource type="Script" uid="uid://jt02vqva5kgl" path="res://src/village/night_glow.gd" id="11_glow"]
+[ext_resource type="Script" uid="uid://mj8p7h812h6y" path="res://src/village/simulation_speed.gd" id="12_speed"]
 [ext_resource type="PackedScene" path="res://src/ui/hud.tscn" id="13_hud"]
 [ext_resource type="PackedScene" path="res://src/ui/title_screen.tscn" id="14_title"]
 
-[node name="VillageScene" type="Node2D"]
+[node name="VillageScene" type="Node2D" unique_id=1671304368]
 script = ExtResource("1_village")
 
-[node name="Ground" type="Node2D" parent="."]
+[node name="Ground" type="Node2D" parent="." unique_id=1445202044]
 
-[node name="World" type="Node2D" parent="."]
+[node name="World" type="Node2D" parent="." unique_id=2143468706]
 y_sort_enabled = true
 
-[node name="CameraRig" type="Camera2D" parent="."]
+[node name="CameraRig" type="Camera2D" parent="." unique_id=184551464]
 script = ExtResource("2_camera")
 
-[node name="Train" parent="." node_paths=PackedStringArray("village") instance=ExtResource("3_train")]
+[node name="Train" parent="." unique_id=1347862733 node_paths=PackedStringArray("village") instance=ExtResource("3_train")]
 village = NodePath("..")
 
-[node name="DayClock" type="Node" parent="."]
+[node name="DayClock" type="Node" parent="." unique_id=1847793194]
 script = ExtResource("4_clock")
 
-[node name="VillagerRoutines" type="Node" parent="." node_paths=PackedStringArray("village", "clock", "train")]
+[node name="VillagerRoutines" type="Node" parent="." unique_id=2052441911 node_paths=PackedStringArray("village", "clock", "train")]
 script = ExtResource("5_routines")
 village = NodePath("..")
 clock = NodePath("../DayClock")
 train = NodePath("../Train")
 
-[node name="KidTag" type="Node" parent="." node_paths=PackedStringArray("village", "clock", "routines")]
+[node name="KidTag" type="Node" parent="." unique_id=467634148 node_paths=PackedStringArray("village", "clock", "routines")]
 script = ExtResource("6_kids")
 village = NodePath("..")
 clock = NodePath("../DayClock")
 routines = NodePath("../VillagerRoutines")
 
-[node name="RooftopDash" type="Node" parent="." node_paths=PackedStringArray("village", "routines")]
+[node name="RooftopDash" type="Node" parent="." unique_id=1192579306 node_paths=PackedStringArray("village", "routines")]
 script = ExtResource("7_dash")
 village = NodePath("..")
 routines = NodePath("../VillagerRoutines")
 
-[node name="VillageLog" type="Node" parent="." node_paths=PackedStringArray("clock", "routines", "kid_tag", "rooftop_dash")]
+[node name="VillageLog" type="Node" parent="." unique_id=1195096457 node_paths=PackedStringArray("clock", "routines", "kid_tag", "rooftop_dash")]
 script = ExtResource("8_log")
 clock = NodePath("../DayClock")
 routines = NodePath("../VillagerRoutines")
 kid_tag = NodePath("../KidTag")
 rooftop_dash = NodePath("../RooftopDash")
 
-[node name="EventDirector" type="Node" parent="." node_paths=PackedStringArray("village", "clock", "routines", "village_log")]
+[node name="EventDirector" type="Node" parent="." unique_id=1547131008 node_paths=PackedStringArray("village", "clock", "routines", "village_log")]
 script = ExtResource("9_events")
 village = NodePath("..")
 clock = NodePath("../DayClock")
 routines = NodePath("../VillagerRoutines")
 village_log = NodePath("../VillageLog")
 
-[node name="NightTint" type="CanvasModulate" parent="."]
+[node name="NightTint" type="CanvasModulate" parent="." unique_id=631581841]
 
-[node name="Daylight" type="Node" parent="." node_paths=PackedStringArray("village", "clock", "train", "tint")]
+[node name="Daylight" type="Node" parent="." unique_id=1662302465 node_paths=PackedStringArray("village", "clock", "train", "tint")]
 script = ExtResource("10_daylight")
 village = NodePath("..")
 clock = NodePath("../DayClock")
 train = NodePath("../Train")
 tint = NodePath("../NightTint")
 
-[node name="NightGlow" type="CanvasLayer" parent="." node_paths=PackedStringArray("village", "train", "daylight")]
-layer = 1
+[node name="NightGlow" type="CanvasLayer" parent="." unique_id=1936531345 node_paths=PackedStringArray("village", "train", "daylight")]
 follow_viewport_enabled = true
 script = ExtResource("11_glow")
 village = NodePath("..")
 train = NodePath("../Train")
 daylight = NodePath("../Daylight")
 
-[node name="SimulationSpeed" type="Node" parent="." node_paths=PackedStringArray("clock", "village_log", "title")]
+[node name="SimulationSpeed" type="Node" parent="." unique_id=1896427992 node_paths=PackedStringArray("clock", "village_log", "title")]
 script = ExtResource("12_speed")
 clock = NodePath("../DayClock")
 village_log = NodePath("../VillageLog")
 title = NodePath("../TitleScreen")
 
-[node name="Hud" parent="." node_paths=PackedStringArray("village", "sim", "clock", "village_log", "train", "routines", "kid_tag") instance=ExtResource("13_hud")]
+[node name="Hud" parent="." unique_id=834590847 node_paths=PackedStringArray("village", "sim", "clock", "village_log", "train", "routines", "kid_tag") instance=ExtResource("13_hud")]
 village = NodePath("..")
 sim = NodePath("../SimulationSpeed")
 clock = NodePath("../DayClock")
@@ -95,4 +94,4 @@ train = NodePath("../Train")
 routines = NodePath("../VillagerRoutines")
 kid_tag = NodePath("../KidTag")
 
-[node name="TitleScreen" parent="." instance=ExtResource("14_title")]
+[node name="TitleScreen" parent="." unique_id=1796489171 instance=ExtResource("14_title")]

@@ -1,8 +1,14 @@
+@tool
 class_name VillageScene
 extends Node2D
 ## The isometric village: ground tiles, buildings, trees, lanterns and street props,
 ## built from [code]assets/data/village_layout.json[/code]. Camera numbers live in
 ## [code]assets/data/village_tuning.json[/code].
+##
+## In the editor this script runs too, so the scene view shows the ground and every
+## placement (a preview: those sprites have no owner, so they are never saved into the
+## scene). After editing the layout file, press [b]Rebuild preview[/b] in the inspector.
+## Villagers, the train and the other runtime nodes only appear when the game runs.
 ##
 ## Every sprite's node origin is its ground anchor, so a node placed at
 ## [method tile_to_world] stands on that tile point. Everything that must sort against
@@ -59,6 +65,9 @@ class Lantern extends Sprite2D:
 var lanterns: Array[Lantern] = []
 ## Every house, tower, shop and station sprite. Frame 0 is day, frame 1 is night.
 var buildings: Array[Sprite2D] = []
+## Editor only: reloads village_layout.json and redraws the scene-view preview.
+@export_tool_button("Rebuild preview", "Reload") var rebuild_preview: Callable = _build_village
+
 ## The village camera.
 @onready var camera: CameraRig = $CameraRig
 
@@ -66,24 +75,47 @@ var _layout: Dictionary = {}
 var _sprites: Dictionary = {}
 var _half_tile: Vector2 = Vector2.ZERO
 var _textures: Dictionary = {}
+## The sprites built from the layout's placements, so a rebuild can remove them.
+var _placed: Array[Node] = []
 
 @onready var _ground: Node2D = $Ground
 @onready var _world: Node2D = $World
 
 
 func _ready() -> void:
-	_layout = _load_json(LAYOUT_PATH, LAYOUT_KEYS)
+	if Engine.is_editor_hint():
+		_build_village()
+		return
 	var tuning: Dictionary = _load_json(TUNING_PATH, TUNING_KEYS)
-	if _layout.is_empty() or tuning.is_empty():
+	if not _build_village() or tuning.is_empty():
 		get_tree().quit(1)
 		return
-	_sprites = _layout["sprites"]
-	_half_tile = Vector2(float(_layout["tile_width"]), float(_layout["tile_height"])) * 0.5
-	_ground.draw.connect(_draw_ground)
-	_ground.queue_redraw()
-	_place_sprites()
 	var centre_tile: float = float(_layout["size"]) * 0.5
 	camera.setup(tuning, tile_to_world(centre_tile, centre_tile))
+
+
+## Loads the layout, draws the ground and places every sprite (again, replacing the
+## last build). Returns false when the layout file is missing or incomplete.
+func _build_village() -> bool:
+	if _world == null or _ground == null:
+		return false
+	_layout = _load_json(LAYOUT_PATH, LAYOUT_KEYS)
+	if _layout.is_empty():
+		return false
+	_sprites = _layout["sprites"]
+	_textures.clear()
+	_half_tile = Vector2(float(_layout["tile_width"]), float(_layout["tile_height"])) * 0.5
+	if not _ground.draw.is_connected(_draw_ground):
+		_ground.draw.connect(_draw_ground)
+	_ground.queue_redraw()
+	for node: Node in _placed:
+		if is_instance_valid(node):
+			node.queue_free()
+	_placed.clear()
+	lanterns.clear()
+	buildings.clear()
+	_place_sprites()
+	return true
 
 
 ## World position (pixels) of the tile point (i, j). Tile (0,0)'s top corner is the
@@ -134,6 +166,7 @@ func _place_sprites() -> void:
 		node.position = tile_to_world(float(entry["i"]), float(entry["j"]))
 		if sprite_name in building_names:
 			buildings.append(node)
+		_placed.append(node)
 		add_entity(node)
 
 
