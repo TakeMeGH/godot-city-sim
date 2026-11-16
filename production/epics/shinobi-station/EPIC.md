@@ -9,10 +9,10 @@
 
 | # | Story | Type | Status | ADR |
 |---|-------|------|--------|-----|
-| 001 | Isometric village scene | Visual/Feel | In Progress | N/A |
+| 001 | Isometric village scene | Visual/Feel | Complete | N/A |
 | 002 | Steam train and station | Integration | Complete | N/A |
 | 003 | Villager routines | Logic | Complete | N/A |
 | 004 | NPCs running around | Logic | Complete | N/A |
 | 005 | Small events and the log | Integration | Complete | N/A |
-| 006 | Day and night | Visual/Feel | In Progress | N/A |
+| 006 | Day and night | Visual/Feel | Complete | N/A |
 | 007 | Idle controls and HUD | UI | Complete | N/A |

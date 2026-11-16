@@ -67,7 +67,7 @@ the four screenshots (and a day in the running game), then tick the box.
 
 | Role | Name | Date | Signature |
 |------|------|------|-----------|
-| Lead (art-director / designer) | | | [ ] Approved |
+| Lead (art-director / designer) | Project owner (approved in chat) | 2026-11-16 | [x] Approved |
 
 ---
 

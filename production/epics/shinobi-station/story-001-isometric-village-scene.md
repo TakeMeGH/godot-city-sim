@@ -1,7 +1,7 @@
 # Story 001: Isometric village scene
 
 > **Epic**: Shinobi Station
-> **Status**: In Progress
+> **Status**: Complete
 > **Layer**: Foundation
 > **Type**: Visual/Feel
 > **Estimate**: L
@@ -82,7 +82,7 @@
 **Story Type**: Visual/Feel
 **Required evidence**: a retained screenshot in `production/qa/evidence/` (the village by day, and the camera panned to two corners) + sign-off in `production/qa/evidence/story-001-isometric-village-scene-evidence.md`
 
-**Status**: [ ] Not yet created
+**Status**: [x] Screenshots and sign-off in `production/qa/evidence/story-001-isometric-village-scene-evidence.md`
 
 ---
 
@@ -90,3 +90,15 @@
 
 - Depends on: None
 - Unlocks: `production/epics/shinobi-station/story-002-steam-train-and-station.md`, `production/epics/shinobi-station/story-003-villager-routines.md`
+
+## Completion Notes
+**Completed**: 2026-11-16
+**Criteria**: 8/9 passing, 1 partly seen. Passing: AC-1 sheets imported with filtering off, AC-2 map from `village_layout.json`, AC-3 placements at the prototype's anchors, AC-4 depth sorting (villagers seen behind and in front of houses in stories 003-005), AC-5 480x270 with whole-number scaling (stills), AC-7 lantern frames and `set_lit` (lit by story 005's lantern round), AC-8 look matches the prototype, AC-9 values in data files. Partly seen: AC-6 the range clamp is seen at both corners; drift and panning are motion
+**Deviations**: ADVISORY — camera drift starts 6 s after launch, where the prototype drifts at once
+**Test Evidence**: Visual/Feel — screenshots and sign-off in `production/qa/evidence/story-001-isometric-village-scene-evidence.md`
+**Sign-off**: the project owner, in chat, 2026-11-16
+**Reviewed by**: self, no independent review
+**Fix rounds**: 1 (`ground_margin` 6 → 10 so no dark clear colour shows at the range corners)
+
+## Calls beyond the design
+- the editor draws the village too: VillageScene is a @tool script with unowned preview sprites and a Rebuild preview button (`village_scene.gd`, commit 1e9231d) · kept 2026-11-16
